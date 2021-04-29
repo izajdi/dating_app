@@ -19,6 +19,9 @@ public class User {
     @Column(name ="email")
     private String email;
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name ="age")
     private Integer age;
 
@@ -26,10 +29,11 @@ public class User {
 
     }
 
-    public User(String firstName, String lastName, String email, Integer age) {
+    public User(String firstName, String lastName, String email, String description, Integer age) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.description = description;
         this.age = age;
     }
 
@@ -47,6 +51,10 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public Integer getAge() {
