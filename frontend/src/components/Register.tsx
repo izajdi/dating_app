@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 
 import '../styles/App.css';
 
+var passwordHash = require('password-hash');
 
 const regexpEmail = new RegExp("[a-zA-Z0-9_\\.\\+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-\\.]+");
 // const regexpPass = new RegExp("/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8})$/");
@@ -19,7 +20,7 @@ const Register = () => {
     
     const [name,setName] = useState("");
     const [mail,setMail] = useState("");
-    const [birthDate,setBirthDate] = useState("");
+    const [birthDate,setBirthDate] = useState(_date);
     const [country,setCountry] = useState("");
     const [city,setCity] = useState("");
     const [gender,setGender] = useState("");
@@ -44,19 +45,87 @@ const Register = () => {
     const handleAddUser = (e)=>{
         e.preventDefault();
 
-        if(name.length===0)alert('podaj imie');
-
-        if(city.length===0)alert('podaj miasto');
-
-        if(!regexpEmail.test(mail))alert('bledny mail');
-
-        if(!regexpPass.test(password) || password.length>6)alert('slabe hasło');
-
-        if(password !== password2)alert('inne hasła');
+        if(name.length===0){
+            alert('podaj imie');
+            return;
         
-        ;
-        
+        }
 
+        if(!regexpEmail.test(mail)){
+
+            alert('bledny mail');
+            return;
+
+
+        }
+
+        if(Number(birthDate.slice(0,4)) > year-14){
+            
+            alert("Nie masz 14 lat");
+            return;
+    
+    }
+
+        if(country.length===0){
+            alert('podaj kraj');
+            return;
+        }
+
+
+        if(city.length===0){
+            alert('podaj miasto');
+            return;
+        }
+
+    if(gender==="" ){
+        alert("podaj plec");
+        return;
+    }
+            
+    
+        if(!regexpPass.test(password) || password.length<6){
+            alert('slabe hasło');
+            return;
+        }
+        if(password !== password2){
+            alert('inne hasła');
+            return;
+        }
+
+        
+        sendUserObject();
+
+    }
+
+
+    
+
+    const buildUserObject = ():any=>{
+
+
+        const user = {
+            first_name:name,
+            email:mail,
+            age:`${year - Number(birthDate.slice(0,4))}`,
+            country:country,
+            city:city,
+            gender:gender,
+            password:passwordHash.generate(password),
+            description:`Mam na imie ${name}`
+            
+        
+        }
+
+        return user;
+
+
+    }
+
+    const sendUserObject = () => {
+        console.log(buildUserObject())
+       const userJson =JSON.stringify(buildUserObject()) ;
+
+        console.log(userJson);
 
     }
 
@@ -87,6 +156,7 @@ const Register = () => {
             <label htmlFor="registerGendersId">
                 Płec:
                 <select id="registerGendersId"  value={gender} onChange={handleOnGenderChange} >
+                    <option value=""></option>
                     <option value="K">K</option>
                     <option value="M" >M</option>
                 </select>
