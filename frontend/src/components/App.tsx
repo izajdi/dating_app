@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from './Login'
+import LoginPage from './LoginPage'
 import Register from './Register'
 import Header from './Header'
 import Main from './Main'
@@ -19,7 +19,7 @@ const App = () => {
 
             <Switch>
               <Route path="/" exact render={()=><Main/>}/>
-              <Route path="/login" exact render={()=><Login/>}/>
+              <Route path="/login" exact render={()=><LoginPage/>}/>
               <Route path="/register" exact render={()=><Register/>}/>
               <Redirect from="*" to="/"/>
 
