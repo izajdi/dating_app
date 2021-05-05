@@ -1,4 +1,4 @@
-package model;
+package com.example.sp.model;
 
 import javax.persistence.*;
 

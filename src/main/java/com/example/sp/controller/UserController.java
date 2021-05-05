@@ -1,12 +1,12 @@
-package controller;
+package com.example.sp.controller;
 
 
-import model.User;
+import com.example.sp.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import repository.UserRepository;
+import com.example.sp.repository.UserRepository;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @GetMapping("users")
     public ResponseEntity<List<User>> getUsers() {
