@@ -19,6 +19,5 @@ public class SpProject2021Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		this.userRepository.save(new User("bart", "zajda", "aa@aa.pl", "aaa", 22));
 	}
 }
