@@ -104,14 +104,14 @@ const Register = () => {
 
 
         const user = {
-            first_name:name,
+            name:name,
+            dateOfBirthday:birthDate, 
             email:mail,
-            age:`${year - Number(birthDate.slice(0,4))}`,
             country:country,
             city:city,
-            gender:gender,
-            password:passwordHash.generate(password),
-            description:`Mam na imie ${name}`
+            description:`Mam na imie ${name}`,
+            password:passwordHash.generate(password)
+            
             
         
         }
@@ -122,10 +122,21 @@ const Register = () => {
     }
 
     const sendUserObject = () => {
-        console.log(buildUserObject())
-       const userJson =JSON.stringify(buildUserObject()) ;
+    //     console.log(buildUserObject())
+    //    const userJson =JSON.stringify(buildUserObject()) ;
 
-        console.log(userJson);
+    //     console.log(userJson);
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+            body: JSON.stringify(buildUserObject()) 
+        };
+
+        fetch('http://localhost:8080/api/user/add', requestOptions)
+        .then(response => response.json())
+        .then(data =>console.log(data))
+        .catch(err => console.log(err));
 
     }
 
