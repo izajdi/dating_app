@@ -22,16 +22,20 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("users")
     public ResponseEntity<List<User>> getUsers() {
         return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("user/add")
     public ResponseEntity<User> addUser(@RequestBody User user) {
+
         return new ResponseEntity<>(userRepository.save(user), HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("user/{id}")
     public ResponseEntity<User> updateUser(@PathVariable("id") Long id, @RequestBody User user) {
         Optional<User> currentUserDate = userRepository.findById(id);

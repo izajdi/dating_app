@@ -6,6 +6,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.example.sp.repository.UserRepository;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 public class SpProject2021Application implements CommandLineRunner {
@@ -20,4 +23,6 @@ public class SpProject2021Application implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 	}
+
+
 }

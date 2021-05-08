@@ -1,14 +1,16 @@
 
 import React, {useState} from 'react';
-import UserPage from './UserPage'
+
 
 import '../styles/App.css';
 
 var passwordHash = require('password-hash');
 
-let isLogged = false;
+type UserPageLoginProps = {
+  logIn:any
+}
 
-const Login = () => {
+const Login = ({logIn}:UserPageLoginProps) => {
 
     
     const [login,setLogin] = useState("");
@@ -38,10 +40,11 @@ const Login = () => {
       }
 
       console.log(JSON.stringify(loginCredentials));
-      isLogged = !isLogged;
-
       
 
+      // if zalogowal sie to wywolujemy metode logIn i zmieniamy state dla LoginPage -> przenosimy sie do strony UserPage
+      logIn(login);
+      // else robimy return i wyswietlamy alert o bledzie logowania
     }
 
 
