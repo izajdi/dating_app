@@ -19,6 +19,7 @@ const Login = ({logIn}:UserPageLoginProps) => {
     const handleOnLoginChange = (e:React.FormEvent<HTMLInputElement>) => setLogin(e.currentTarget.value);
     const handleOnPassChange = (e:React.FormEvent<HTMLInputElement>) => setPassword(e.currentTarget.value);
 
+
     const handleLogIn = (e)=>{
         e.preventDefault();
 
@@ -34,7 +35,7 @@ const Login = ({logIn}:UserPageLoginProps) => {
         }
 
       const loginCredentials = {
-        login,
+        email:login,
         password:passwordHash.generate(password)
 
       }
@@ -43,8 +44,22 @@ const Login = ({logIn}:UserPageLoginProps) => {
       
 
       // if zalogowal sie to wywolujemy metode logIn i zmieniamy state dla LoginPage -> przenosimy sie do strony UserPage
-      logIn(login);
+      // logIn(login);
       // else robimy return i wyswietlamy alert o bledzie logowania
+
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify(loginCredentials) 
+    };
+
+    fetch('http://localhost:8080/api/login', requestOptions)
+    .then(response => response.json())
+    .then(data =>console.log(data))
+    .catch(err => console.log(err));
+
+
+
     }
 
 

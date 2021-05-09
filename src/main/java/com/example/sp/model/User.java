@@ -1,5 +1,7 @@
 package com.example.sp.model;
 
+import org.springframework.lang.NonNull;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,12 +12,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     @Column(name ="name")
     private String name;
 
     @Column(name ="date_of_birthday")
     private String dateOfBirthday;
 
+    @NonNull
     @Column(name ="email")
     private String email;
 
@@ -28,6 +32,8 @@ public class User {
     @Column(name = "description")
     private String description;
 
+
+    @NonNull
     @Column(name ="password")
     private String password;
 
