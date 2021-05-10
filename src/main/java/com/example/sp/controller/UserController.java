@@ -31,6 +31,11 @@ public class UserController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("user/add")
     public ResponseEntity<User> addUser(@RequestBody User user) {
+        Optional<User> userFromDb = userRepository.findByEmail(user.getEmail());
+
+        if (userFromDb.isPresent()) {
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+        }
 
         return new ResponseEntity<>(userRepository.save(user), HttpStatus.OK);
     }
@@ -44,6 +49,28 @@ public class UserController {
                         HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(user, HttpStatus.BAD_REQUEST));
     }
+
+
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/login")
+    public ResponseEntity<User> login(@RequestBody User user) {
+        Optional<User> userFromDb = userRepository.findByEmail(user.getEmail());
+
+
+        if (userFromDb.isEmpty() || wrongPassword(userFromDb, user)) {
+
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        return new ResponseEntity<>(userFromDb.get(), HttpStatus.OK);
+    }
+
+    private boolean wrongPassword(Optional<User> userFromDb, User user) {
+
+        return !userFromDb.get().getPassword().equals(user.getPassword());
+    }
+
 
 
 }
