@@ -4,7 +4,10 @@ import React, {useState} from 'react';
 
 import '../styles/App.css';
 
-var passwordHash = require('password-hash');
+// var passwordHash = require('password-hash');
+var passwordHash = require('md5');
+
+
 
 type UserPageLoginProps = {
   logIn:any
@@ -35,12 +38,17 @@ const Login = ({logIn}:UserPageLoginProps) => {
         }
 
       const loginCredentials = {
-        email:login,
-        password:passwordHash.generate(password)
+            name:"",
+            dateOfBirthday:"", 
+            email:login,
+            country:"",
+            city:"",
+            description:"",
+            password:passwordHash(password)
 
       }
 
-      console.log(JSON.stringify(loginCredentials));
+      
       
 
       // if zalogowal sie to wywolujemy metode logIn i zmieniamy state dla LoginPage -> przenosimy sie do strony UserPage
@@ -54,8 +62,14 @@ const Login = ({logIn}:UserPageLoginProps) => {
     };
 
     fetch('http://localhost:8080/api/login', requestOptions)
-    .then(response => response.json())
-    .then(data =>console.log(data))
+    .then(response => {
+      if(response.status === 200){
+          logIn(login);
+          return response.json();
+      }else if(response.status===401){
+        alert("Nieprawidłowe dane!")
+      }
+    })
     .catch(err => console.log(err));
 
 

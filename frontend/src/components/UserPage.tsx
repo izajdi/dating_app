@@ -20,6 +20,13 @@ const UserPage = ({login,logOut}:UserPageProps) => {
 
   */
 
+  useEffect( () =>{
+    fetch('http://localhost:8080/api/users')
+        .then(response => response.json())
+        .then(data =>setUsers(data))
+        .catch(err => console.log(err));
+  },[])
+
   const handleLogOut = () => {
     logOut();
   }

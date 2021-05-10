@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 
 import '../styles/App.css';
 
-var passwordHash = require('password-hash');
+// var passwordHash = require('password-hash');
+var passwordHash = require('md5');
 
 const regexpEmail = new RegExp("[a-zA-Z0-9_\\.\\+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-\\.]+");
 // const regexpPass = new RegExp("/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8})$/");
@@ -13,7 +14,7 @@ const Register = () => {
     const today = new Date();
     const year = today.getFullYear();
     const month = (today.getMonth()+1)>9 ? today.getMonth()+1 : `0${today.getMonth()+1}` ;
-    const day = today.getDate()>10 ? today.getDate() : "0"+today.getDate();
+    const day = today.getDate()>=10 ? today.getDate() : "0"+today.getDate();
     const _date = [year,month,day].join('-');
 
 
@@ -110,7 +111,7 @@ const Register = () => {
             country:country,
             city:city,
             description:`Mam na imie ${name}`,
-            password:passwordHash.generate(password)
+            password:passwordHash(password)
             
             
         
@@ -118,6 +119,21 @@ const Register = () => {
 
         return user;
 
+
+    }
+
+
+    const clearForm =()=> {
+        setName("");
+        setMail("");
+        setBirthDate(_date);
+        setCountry("") 
+        setCity("");
+
+        setGender("");
+
+        setPassword(""); 
+        setPassword2("");
 
     }
 
@@ -134,14 +150,28 @@ const Register = () => {
         };
 
         fetch('http://localhost:8080/api/user/add', requestOptions)
-        .then(response => response.json())
+        .then(response => {
+            if(response.status === 200){
+                alert("Użytkownik zarejestrowany!");
+                clearForm();
+                return  response.json();
+            }
+            else if(response.status ===422){
+                alert("Użytkownik o podanym adresie email juz istnieje!");
+            }else{
+                alert("Rejestracja nieudana. Spróbuj ponownie!");
+            }
+        })
         .then(data =>console.log(data))
         .catch(err => console.log(err));
 
     }
 
-
+    console.log(_date);
   return (
+    
+
+
     <div className="register">
         <form>
             <label htmlFor="registerNameId">

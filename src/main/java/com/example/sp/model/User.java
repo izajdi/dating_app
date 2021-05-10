@@ -20,7 +20,7 @@ public class User {
     private String dateOfBirthday;
 
     @NonNull
-    @Column(name ="email")
+    @Column(name ="email",unique = true)
     private String email;
 
     @Column(name = "country")

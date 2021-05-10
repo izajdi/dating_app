@@ -32,6 +32,7 @@ public class UserController {
     @PostMapping("user/add")
     public ResponseEntity<User> addUser(@RequestBody User user) {
         Optional<User> userFromDb = userRepository.findByEmail(user.getEmail());
+
         if (userFromDb.isPresent()) {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         }
@@ -53,21 +54,20 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody User user) {
+    public ResponseEntity<User> login(@RequestBody User user) {
         Optional<User> userFromDb = userRepository.findByEmail(user.getEmail());
-        System.out.println(userFromDb.get().toString());
+
 
         if (userFromDb.isEmpty() || wrongPassword(userFromDb, user)) {
-            System.out.println("userFromDb.isEmpty()");
+
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(userFromDb.get(), HttpStatus.OK);
     }
 
     private boolean wrongPassword(Optional<User> userFromDb, User user) {
-        System.out.println(user.getPassword());
-        System.out.println(userFromDb.get().getPassword());
+
         return !userFromDb.get().getPassword().equals(user.getPassword());
     }
 
