@@ -1,13 +1,13 @@
-package com.example.sp.controller;
+package com.example.sp.User.controller;
 
 
-import com.example.sp.model.User;
-import com.example.sp.service.UserService;
+import com.example.sp.User.model.User;
+import com.example.sp.User.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.sp.repository.UserRepository;
+import com.example.sp.User.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,11 +32,10 @@ public class UserController {
     @PostMapping("user/add")
     public ResponseEntity<User> addUser(@RequestBody User user) {
         Optional<User> userFromDb = userRepository.findByEmail(user.getEmail());
-
         if (userFromDb.isPresent()) {
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
+                    .build();
         }
-
         return new ResponseEntity<>(userRepository.save(user), HttpStatus.OK);
     }
 
@@ -51,26 +50,13 @@ public class UserController {
     }
 
 
-
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody User user) {
-        Optional<User> userFromDb = userRepository.findByEmail(user.getEmail());
-
-
-        if (userFromDb.isEmpty() || wrongPassword(userFromDb, user)) {
-
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-
-        return new ResponseEntity<>(userFromDb.get(), HttpStatus.OK);
+        Optional<User> userFromDateBase = userRepository.findByEmail(user.getEmail());
+        return userFromDateBase
+                .filter(userFromDb -> userService.arePasswordsEquals(userFromDb.getPassword(), user.getPassword()))
+                .map(userFromDb -> new ResponseEntity<>(userFromDb, HttpStatus.OK))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
-
-    private boolean wrongPassword(Optional<User> userFromDb, User user) {
-
-        return !userFromDb.get().getPassword().equals(user.getPassword());
-    }
-
-
-
 }

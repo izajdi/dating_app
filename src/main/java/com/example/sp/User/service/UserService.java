@@ -1,6 +1,6 @@
-package com.example.sp.service;
+package com.example.sp.User.service;
 
-import com.example.sp.model.User;
+import com.example.sp.User.model.User;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,6 +17,10 @@ public class UserService {
                 .description(getCurrentDescription(currentUser, userToUpdate))
                 .password(getCurrentPassword(currentUser, userToUpdate))
                 .build();
+    }
+
+    public Boolean arePasswordsEquals(String firstPassword, String secondPassword) {
+        return firstPassword.equals(secondPassword);
     }
 
     private String getCurrentName(User currentUser, User userToUpdate) {

@@ -1,4 +1,4 @@
-package com.example.sp.model;
+package com.example.sp.User.model;
 
 import org.springframework.lang.NonNull;
 
