@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import '../styles/App.css';
+
 
 // var passwordHash = require('password-hash');
 var passwordHash = require('md5');

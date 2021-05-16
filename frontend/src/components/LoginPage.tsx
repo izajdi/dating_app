@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import UserPage from './UserPage'
 import Login from './Login'
 
-import '../styles/App.css';
+
 
 // var passwordHash = require('password-hash');
 

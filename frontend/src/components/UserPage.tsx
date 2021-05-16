@@ -1,7 +1,10 @@
 import React, {useState, useEffect} from 'react';
+import UserDetails from './UserDetails';
+import FilterForm from './FilterForm';
+import ProfilesList from './ProfilesList';
 
-import '../styles/App.css';
 
+import '../styles/UserPage.scss';
 
 type UserPageProps = {
   login: String,
@@ -11,14 +14,10 @@ type UserPageProps = {
 const UserPage = ({login,logOut}:UserPageProps) => {
 
 
-  const [users,setUsers] = useState([]);
+  const [users,setUsers] = useState<any[]>([]);
+  const currentUser = users.filter( user => user.email === login)[0];
 
-  /*
-  useEffect pobrac wszytskich userow z bazy i przefiltorwac, wykluczyc zalogowanego usera po loginie 
-  a na podstawie obiektu danego usera wyrenderowac odpowiedni wyglad strony
-
-
-  */
+ 
 
   useEffect( () =>{
     fetch('http://localhost:8080/api/users')
@@ -30,13 +29,20 @@ const UserPage = ({login,logOut}:UserPageProps) => {
   const handleLogOut = () => {
     logOut();
   }
-
+ 
 
   return (
-    <div>
+    <div className="userPage">
       
-      <h1>UserPage</h1>
+      {currentUser && <h1>{`Witaj ${currentUser.name.charAt(0).toUpperCase() + currentUser.name.slice(1)}`}</h1>}
       <button onClick={handleLogOut}>Wyloguj</button>
+
+      <main>
+      <FilterForm/>
+      <ProfilesList users={users}  currentUser={currentUser}/>
+      <UserDetails user={currentUser} />
+      </main>
+      
       
       </div>
   );
