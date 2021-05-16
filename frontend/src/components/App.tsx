@@ -9,7 +9,7 @@ import Footer from './Footer'
 import {Switch, Route, Redirect} from "react-router-dom";
 
 
-import '../styles/App.css';
+import '../styles/App.scss';
 
 const App = () => {
   return (

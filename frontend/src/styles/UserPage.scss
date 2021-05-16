@@ -1,0 +1,30 @@
+.userPage {
+  height: 80vh;
+}
+
+.userPage main {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  grid-template-rows: 20% 80%;
+
+  grid-template-areas:
+    "form user"
+    "profiles user";
+
+  height: 100%;
+}
+
+.userPage main .filterForm {
+  background-color: #eee;
+  grid-area: form;
+}
+
+.userPage main .userDetails {
+  background-color: #999;
+  grid-area: user;
+}
+
+.userPage main .profilesList {
+  background-color: #444;
+  grid-area: profiles;
+}
