@@ -17,7 +17,15 @@ const UserPage = ({login,logOut}:UserPageProps) => {
   const [users,setUsers] = useState<any[]>([]);
   const currentUser = users.filter( user => user.email === login)[0];
 
- 
+  const [refresh,setRefresh] = useState(false);
+
+ const getCurrentUsers = ()=>{
+  setRefresh(prev=>!prev);
+  fetch('http://localhost:8080/api/users')
+  .then(response => response.json())
+  .then(data =>setUsers(data))
+  .catch(err => console.log(err));
+ }
 
   useEffect( () =>{
     fetch('http://localhost:8080/api/users')
@@ -40,7 +48,7 @@ const UserPage = ({login,logOut}:UserPageProps) => {
       <main>
       <FilterForm/>
       <ProfilesList users={users}  currentUser={currentUser}/>
-      <UserDetails user={currentUser} />
+      <UserDetails user={currentUser} refresh={getCurrentUsers} />
       </main>
       
       

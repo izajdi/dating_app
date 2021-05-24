@@ -36,6 +36,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
                     .build();
         }
+        
         return new ResponseEntity<>(userRepository.save(user), HttpStatus.OK);
     }
 
