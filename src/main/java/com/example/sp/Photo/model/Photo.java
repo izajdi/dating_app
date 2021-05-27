@@ -1,4 +1,4 @@
-package com.example.sp.Photo;
+package com.example.sp.Photo.model;
 
 import javax.persistence.*;
 import java.util.List;

@@ -1,9 +1,10 @@
 package com.example.sp.User.model;
 
-import com.example.sp.Photo.Photo;
+import com.example.sp.Photo.model.Photo;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -77,6 +78,10 @@ public class User {
         return password;
     }
 
+    public List<Photo> getPhotos() {
+        return photos;
+    }
+
 
     public static final class UserBuilder {
         private Long id;
@@ -87,6 +92,7 @@ public class User {
         private String city;
         private String description;
         private String password;
+        private List<Photo> photos = Collections.emptyList();
 
         private UserBuilder() {
         }
@@ -135,6 +141,11 @@ public class User {
             return this;
         }
 
+        public UserBuilder photos(List<Photo> photos) {
+            this.photos = photos;
+            return this;
+        }
+
         public User build() {
             User user = new User();
             user.password = this.password;
@@ -145,6 +156,7 @@ public class User {
             user.email = this.email;
             user.id = this.id;
             user.country = this.country;
+            user.photos = this.photos;
             return user;
         }
     }

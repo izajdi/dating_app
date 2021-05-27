@@ -1,6 +1,7 @@
 package com.example.sp.User.controller;
 
 
+import com.example.sp.Photo.model.Photo;
 import com.example.sp.User.model.User;
 import com.example.sp.User.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,5 +60,13 @@ public class UserController {
                 .filter(userFromDb -> userService.arePasswordsEquals(userFromDb.getPassword(), user.getPassword()))
                 .map(userFromDb -> new ResponseEntity<>(userFromDb, HttpStatus.OK))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+    }
+
+    @GetMapping("/getPhotos/{id}")
+    public ResponseEntity<List<Photo>> getPhotosByUserId(@PathVariable("id") Long id) {
+        Optional<User> userFromDb = userRepository.findById(id);
+        return userFromDb
+                .map(user -> new ResponseEntity<>(user.getPhotos(), HttpStatus.OK))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
     }
 }

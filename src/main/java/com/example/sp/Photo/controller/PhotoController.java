@@ -1,8 +1,8 @@
-package com.example.sp.Photo;
+package com.example.sp.Photo.controller;
 
-import org.apache.coyote.Response;
+import com.example.sp.Photo.repository.PhotoRepository;
+import com.example.sp.Photo.model.Photo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
