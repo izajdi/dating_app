@@ -39,7 +39,7 @@ public class User {
     private String password;
 
     @OneToMany
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "photos")
     private List<Photo> photos;
 
     public User() {

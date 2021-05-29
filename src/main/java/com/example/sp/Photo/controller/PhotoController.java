@@ -20,6 +20,7 @@ public class PhotoController {
     public ResponseEntity<Long> addPhoto(@RequestBody Photo photo) {
         photoRepository.save(photo);
         return ResponseEntity
-                .ok(photo.getId());
+                .ok()
+                .build();
     }
 }
