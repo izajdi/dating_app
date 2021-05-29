@@ -63,10 +63,10 @@ public class UserController {
     }
 
     @GetMapping("/getPhotos/{id}")
-    public ResponseEntity<List<Photo>> getPhotosByUserId(@PathVariable("id") Long id) {
+    public ResponseEntity<Photo> getPhotosByUserId(@PathVariable("id") Long id) {
         Optional<User> userFromDb = userRepository.findById(id);
         return userFromDb
-                .map(user -> new ResponseEntity<>(user.getPhotos(), HttpStatus.OK))
+                .map(user -> new ResponseEntity<>(user.getPhoto(), HttpStatus.OK))
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
     }
 }
