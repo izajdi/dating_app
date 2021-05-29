@@ -38,9 +38,9 @@ public class User {
     @Column(name ="password")
     private String password;
 
-    @OneToMany
-    @JoinColumn(name = "user_id")
-    private List<Photo> photos;
+    @OneToOne
+    @JoinColumn(name = "photo", referencedColumnName = "user_id")
+    private Photo photo;
 
     public User() {
 
@@ -78,8 +78,8 @@ public class User {
         return password;
     }
 
-    public List<Photo> getPhotos() {
-        return photos;
+    public Photo getPhoto() {
+        return photo;
     }
 
 
@@ -92,7 +92,7 @@ public class User {
         private String city;
         private String description;
         private String password;
-        private List<Photo> photos = Collections.emptyList();
+        private Photo photo;
 
         private UserBuilder() {
         }
@@ -141,8 +141,8 @@ public class User {
             return this;
         }
 
-        public UserBuilder photos(List<Photo> photos) {
-            this.photos = photos;
+        public UserBuilder photo(Photo photo) {
+            this.photo = photo;
             return this;
         }
 
@@ -156,7 +156,7 @@ public class User {
             user.email = this.email;
             user.id = this.id;
             user.country = this.country;
-            user.photos = this.photos;
+            user.photo = this.photo;
             return user;
         }
     }
