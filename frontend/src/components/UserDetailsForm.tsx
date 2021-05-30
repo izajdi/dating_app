@@ -13,13 +13,14 @@ type UserDetailsFormProps = {
     dateOfBirthday:string,
     country:string,
     city:string,
+    gender:string,
     description:string,
     password:string,
     refresh:any,
     changeUser:any
   }
 
-const UserDetailsForm = ({userId,name,email,dateOfBirthday,country,city,description,password,refresh,changeUser}:UserDetailsFormProps) => {
+const UserDetailsForm = ({userId,name,email,dateOfBirthday,country,city,gender,description,password,refresh,changeUser}:UserDetailsFormProps) => {
 
     const today = new Date();
     const year = today.getFullYear();
@@ -37,7 +38,7 @@ const UserDetailsForm = ({userId,name,email,dateOfBirthday,country,city,descript
   const [newBirthDate,setNewBirthDate] = useState(dateOfBirthday || "");
   const [newCountry,setNewCountry] = useState(country || "");
   const [newCity,setNewCity] = useState(city || "");
-  const [newGender,setNewGender] = useState("");
+  const [newGender,setNewGender] = useState(gender || "");
   const [newDescription,setNewDescription] = useState(description || "");
   const [oldPassword,setOldPassword] = useState("");
   const [newPassword,setPassword] = useState("");
@@ -67,6 +68,7 @@ const UserDetailsForm = ({userId,name,email,dateOfBirthday,country,city,descript
         email:newEmail,
         country:newCountry,
         city:newCity,
+        gender:gender,
         description:newDescription,
         password:passwordHash(newPassword)
         
@@ -117,10 +119,10 @@ const UserDetailsForm = ({userId,name,email,dateOfBirthday,country,city,descript
         return;
     }
 
-if(newGender==="" ){
-    alert("podaj plec");
-    return;
-}
+// if(newGender==="" ){
+//     alert("podaj plec");
+//     return;
+// }
         
 
 
@@ -189,7 +191,7 @@ if(passwordHash(oldPassword) !== password){
             </label> 
             <label htmlFor="registerBirthDateId">
                 Data urodzenia: 
-                <input id="registerBirthDateId"  value={newBirthDate} max={_date} onChange={handleOnBirthdateChange} type="date"/>
+                <input id="registerBirthDateId"  value={newBirthDate} max={_date} onChange={handleOnBirthdateChange} type="date" disabled/>
             </label> 
             <label htmlFor="registerCountryId">
                 Kraj:
@@ -201,7 +203,7 @@ if(passwordHash(oldPassword) !== password){
             </label> 
             <label htmlFor="registerGendersId">
                 Płec:
-                <select id="registerGendersId"  value={newGender} onChange={handleOnGenderChange} >
+                <select id="registerGendersId"  value={gender} onChange={handleOnGenderChange} disabled>
                     <option value=""></option>
                     <option value="K">K</option>
                     <option value="M" >M</option>

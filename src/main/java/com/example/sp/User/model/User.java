@@ -31,6 +31,10 @@ public class User {
     @Column(name = "city")
     private String city;
 
+
+    @Column(name = "gender")
+    private Character gender;
+
     @Column(name = "description")
     private String description;
 
@@ -70,6 +74,8 @@ public class User {
         return city;
     }
 
+    public Character getGender() {return gender;}
+
     public String getDescription() {
         return description;
     }
@@ -90,6 +96,7 @@ public class User {
         private String email;
         private String country;
         private String city;
+        private Character gender;
         private String description;
         private String password;
         private Photo photo;
@@ -131,6 +138,11 @@ public class User {
             return this;
         }
 
+        public UserBuilder gender(Character gender) {
+            this.gender = gender;
+            return this;
+        }
+
         public UserBuilder description(String description) {
             this.description = description;
             return this;
@@ -153,6 +165,7 @@ public class User {
             user.name = this.name;
             user.description = this.description;
             user.city = this.city;
+            user.gender = this.gender;
             user.email = this.email;
             user.id = this.id;
             user.country = this.country;
