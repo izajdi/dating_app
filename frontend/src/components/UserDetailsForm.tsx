@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-
+import '../styles/UserDetailsForm.scss'
 var passwordHash = require('md5');
 
 

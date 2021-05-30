@@ -1,7 +1,7 @@
 
 import React, {useState} from 'react';
 
-
+import '../styles/Login.scss';
 
 
 // var passwordHash = require('password-hash');
