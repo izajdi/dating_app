@@ -1,5 +1,5 @@
 
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import UserPage from './UserPage'
 import Login from './Login'
 
@@ -22,7 +22,21 @@ const LoginPage = () => {
         setLogin(prev);
         setIsLogged(true);
     }
-    const handleOnLogOut = () => setIsLogged(false);
+    const handleOnLogOut = () => {
+      setIsLogged(false);
+      localStorage.clear();
+    }
+
+
+    useEffect(() => {
+      const loggedIn = localStorage.getItem("login");
+      
+      if (loggedIn) {
+        
+        setLogin(loggedIn);
+        setIsLogged(true);
+      }
+    }, []);
 
   return (
     isLogged ? <UserPage login={login} logOut={handleOnLogOut} /> : <Login   logIn={handleOnLoginChange}/>

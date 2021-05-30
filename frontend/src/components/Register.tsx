@@ -110,6 +110,7 @@ const Register = () => {
             email:mail,
             country:country,
             city:city,
+            gender:gender,
             description:`Mam na imie ${name}`,
             password:passwordHash(password)
             
