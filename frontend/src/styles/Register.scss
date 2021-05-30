@@ -1,0 +1,49 @@
+div.register {
+  text-align: center;
+  width: 100vw;
+
+  form {
+    height: 60%;
+    width: 100%;
+
+    transform: translateY(180px);
+    div {
+      width: 50%;
+      position: relative;
+      top: 50%;
+      left: 50%;
+
+      label {
+        display: block;
+        color: white;
+        width: 200px;
+        padding: 5px 10px;
+      }
+
+      button {
+        display: block;
+        background-color: rgba(228, 68, 68, 0.705);
+
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        outline: inherit;
+        margin: 15px 5px;
+        color: #fff;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-weight: bold;
+        z-index: 1;
+        height: 50px;
+        width: 200px;
+
+        text-align: center;
+        transition: 0.2s;
+
+        &:hover {
+          border: 2px solid white;
+        }
+      }
+    }
+  }
+}

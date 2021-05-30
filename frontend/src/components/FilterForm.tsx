@@ -1,5 +1,5 @@
 import React from 'react';
-
+import '../styles/FilterForm.scss'
 
 
 const FilterForm = () => {

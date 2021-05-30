@@ -1,6 +1,6 @@
 import React from 'react';
 import Profile from './Profile';
-
+import '../styles/ProfileList.scss'
 
 type ProfilesListProps = {
     users: any[],

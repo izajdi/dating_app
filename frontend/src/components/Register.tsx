@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-
+import '../styles/Register.scss';
 
 
 // var passwordHash = require('password-hash');
@@ -175,6 +175,7 @@ const Register = () => {
 
     <div className="register">
         <form>
+            <div>   
             <label htmlFor="registerNameId">
                 Imie:
                 <input id="registerNameId" value={name} onChange={handleOnNameChange} type="text" required/>
@@ -215,6 +216,7 @@ const Register = () => {
             
 
             <button onClick={handleAddUser} >Zarejestruj</button>
+            </div>
         </form>  
     </div>
   );

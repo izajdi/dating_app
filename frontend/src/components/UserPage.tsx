@@ -42,10 +42,11 @@ const UserPage = ({login,logOut}:UserPageProps) => {
   return (
     <div className="userPage">
       
-      {currentUser && <h1>{`Witaj ${currentUser.name.charAt(0).toUpperCase() + currentUser.name.slice(1)}`}</h1>}
+      
       <button onClick={handleLogOut}>Wyloguj</button>
-
+      {currentUser && <h1>{`Witaj ${currentUser.name.charAt(0).toUpperCase() + currentUser.name.slice(1)}`}</h1>}
       <main>
+      
       <FilterForm/>
       <ProfilesList users={users}  currentUser={currentUser}/>
       <UserDetails user={currentUser} refresh={getCurrentUsers} />
