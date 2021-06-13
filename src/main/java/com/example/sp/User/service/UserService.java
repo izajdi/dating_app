@@ -6,6 +6,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
+    public void addLikedUserId(User user, Long id) {
+        user.setLikedUserId(String.valueOf(id));
+    }
+
     public User getUserEntityToUpdate(User currentUser, User userToUpdate) {
         return User.UserBuilder.builder()
                 .id(currentUser.getId())
@@ -16,6 +20,8 @@ public class UserService {
                 .city(getCurrentCity(currentUser, userToUpdate))
                 .description(getCurrentDescription(currentUser, userToUpdate))
                 .password(getCurrentPassword(currentUser, userToUpdate))
+                .gender(getCurrentGender(currentUser, userToUpdate))
+                .interests(getCurrentInterest(currentUser, userToUpdate))
                 .build();
     }
 
@@ -70,5 +76,19 @@ public class UserService {
             return currentUser.getPassword();
         }
         return userToUpdate.getPassword();
+    }
+
+    private String getCurrentGender(User currentUser, User userToUpdate) {
+        if(userToUpdate.getPassword().isEmpty()) {
+            return currentUser.getPassword();
+        }
+        return userToUpdate.getPassword();
+    }
+
+    private String getCurrentInterest(User currentUser, User userToUpdate) {
+        if(userToUpdate.getInterests().isEmpty()) {
+            return currentUser.getInterests();
+        }
+        return userToUpdate.getInterests();
     }
 }

@@ -31,7 +31,6 @@ public class User {
     @Column(name = "city")
     private String city;
 
-
     @Column(name = "gender")
     private String gender;
 
@@ -42,9 +41,11 @@ public class User {
     @Column(name ="password")
     private String password;
 
-    @OneToOne
-    @JoinColumn(name = "photo", referencedColumnName = "user_id")
-    private Photo photo;
+    @Column(name = "interests")
+    private String interests;
+
+    @Column(name = "likedUserId")
+    private String likedUserId;
 
     public User() {
 
@@ -84,10 +85,22 @@ public class User {
         return password;
     }
 
-    public Photo getPhoto() {
-        return photo;
+    public String getInterests() {
+        return interests;
     }
 
+    public String getLikedUserId() {
+        return likedUserId;
+    }
+
+    public void setLikedUserId(String id) {
+        if(likedUserId == null) {
+            likedUserId = id;
+        }
+        else{
+            this.likedUserId = String.format("%s, %s", likedUserId, id);
+        }
+    }
 
     public static final class UserBuilder {
         private Long id;
@@ -99,7 +112,8 @@ public class User {
         private String gender;
         private String description;
         private String password;
-        private Photo photo;
+        private String interests;
+        private String likedUserId;
 
         private UserBuilder() {
         }
@@ -153,8 +167,13 @@ public class User {
             return this;
         }
 
-        public UserBuilder photo(Photo photo) {
-            this.photo = photo;
+        public UserBuilder interests(String interests) {
+            this.interests = interests;
+            return this;
+        }
+
+        public UserBuilder likedUserId(String likedUserId) {
+            this.likedUserId = likedUserId;
             return this;
         }
 
@@ -169,7 +188,8 @@ public class User {
             user.email = this.email;
             user.id = this.id;
             user.country = this.country;
-            user.photo = this.photo;
+            user.interests = this.interests;
+            user.likedUserId = this.likedUserId;
             return user;
         }
     }

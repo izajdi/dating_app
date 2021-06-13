@@ -62,11 +62,14 @@ public class UserController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
 
-    @GetMapping("/getPhotos/{id}")
-    public ResponseEntity<Photo> getPhotosByUserId(@PathVariable("id") Long id) {
-        Optional<User> userFromDb = userRepository.findById(id);
-        return userFromDb
-                .map(user -> new ResponseEntity<>(user.getPhoto(), HttpStatus.OK))
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PutMapping("/addLikedUser")
+    public ResponseEntity<User> addLikedUser(@RequestBody User user, @RequestParam("id") Long id) {
+        userService.addLikedUserId(user, id);
+        userRepository.save(user);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
+
+
+
 }
