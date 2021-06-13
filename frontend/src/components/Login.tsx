@@ -65,7 +65,7 @@ const Login = ({logIn}:UserPageLoginProps) => {
     .then(response => {
       if(response.status === 200){
           logIn(login);
-          localStorage.setItem('login', login)
+          sessionStorage.setItem('login', login)
           return response.json();
       }else if(response.status===401){
         alert("Nieprawidłowe dane!")

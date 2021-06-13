@@ -18,7 +18,7 @@ const ProfilesList = ({users,currentUser}:ProfilesListProps) => {
   return (
     <div className="profilesList" >
         <ul>
-            {profiles}
+            {profiles.slice(0,5)}
         </ul>
         
         

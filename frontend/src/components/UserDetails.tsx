@@ -39,6 +39,9 @@ const UserDetails = ({user,refresh}:UserDetailsProps) => {
 
   const handleSubmit = (e)=>{
     e.preventDefault();
+
+    if(!photo)return;
+
     setIsPhotoFormActive(false);
 
   let form_data = new FormData();
@@ -76,24 +79,25 @@ const UserDetails = ({user,refresh}:UserDetailsProps) => {
   }
 
   const photoForm = <>
-                    <form onSubmit={handleSubmit}>
-                      <input type="file" name="picture"  onChange={handleChangePhoto} />
+                    <form className="photoForm" onSubmit={handleSubmit}>
+                      <input className="photoInput" type="file" name="picture"  onChange={handleChangePhoto} />
                       <button onClick={handleClearPhotoForm}>Anuluj</button>
-                      <button>Zmien</button>
+                      <button >Zmien</button>
                     </form>
                     </>
 
   const userDetails = <>
                 <img src={blankProfile} alt="" onClick={handleChangePhotoForm}/>
+                <br/>
                 {isPhotoFormActive && photoForm}
 
-                <p>Imie: <span>{user && user.name}</span></p>
-                <p>Email: <span>{user && user.email}</span></p>
-                <p>Data urodzenia: <span>{user && user.dateOfBirthday}</span></p>
-                <p>Panstwo: <span>{user && user.country}</span></p>
-                <p>Miasto: <span>{user && user.city}</span></p>
-                <p>Pleć: <span>{user && user.gender}</span></p>
-                <p>Opis: <span>{user && user.description}</span></p>
+                <p><span>Imie: </span>{user && user.name}</p>
+                <p><span>Email: </span>{user && user.email}</p>
+                <p><span>Data urodzenia: </span>{user && user.dateOfBirthday}</p>
+                <p><span>Panstwo: </span>{user && user.country}</p>
+                <p><span>Miasto: </span>{user && user.city}</p>
+                <p><span>Pleć: </span>{user && user.gender}</p>
+                <p><span>Opis: </span>{user && user.description}</p>
                       </>
 
  
@@ -103,14 +107,12 @@ const userDetailsForm = user &&<UserDetailsForm
       email={user.email}
       dateOfBirthday={user.dateOfBirthday}
       country={user.country}
-        city={user.city}
-        gender={user.gender}
-        description={user.description}
-        password={user.password}
-
-        refresh={refresh}
-
-        changeUser={()=>setEditMode(false)}
+      city={user.city}
+      gender={user.gender}
+      description={user.description}
+      password={user.password}
+      refresh={refresh}
+      changeUser={()=>setEditMode(false)}
 
       
 />
