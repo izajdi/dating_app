@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart, faHeartBroken} from '@fortawesome/free-solid-svg-icons'
 
 import '../styles/Profile.scss';
 
@@ -22,7 +24,17 @@ const Profile = ({profile} : ProfileProps) => {
     const age = profile ? calculateAge(profile.dateOfBirthday)  : null;
 
   return (
-    <li>{`${profile.name} : ${age} : ${profile.city}  : ${profile.description}` } <img src={blankProfile} alt="" /></li>
+    <li className="listItem">
+       <img src={blankProfile} alt="" /> <br/>
+      {`${profile.name} : ${age} : ${profile.gender}: ${profile.city}  : ${profile.description}` }
+      <br/>
+      
+      
+       <button className="dislike"><FontAwesomeIcon icon={faHeartBroken} /></button>
+       <button className="like"><FontAwesomeIcon icon={faHeart} /></button>
+
+      
+      </li>
   );
 }
 

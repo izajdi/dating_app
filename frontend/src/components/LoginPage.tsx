@@ -24,12 +24,12 @@ const LoginPage = () => {
     }
     const handleOnLogOut = () => {
       setIsLogged(false);
-      localStorage.clear();
+      sessionStorage.clear();
     }
 
 
     useEffect(() => {
-      const loggedIn = localStorage.getItem("login");
+      const loggedIn = sessionStorage.getItem("login");
       
       if (loggedIn) {
         

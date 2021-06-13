@@ -1,5 +1,55 @@
-.userDetails img {
-  width: 100px;
-  height: 100px;
-  margin-top: 20px;
+div.userDetails {
+  position: relative;
+  text-align: center;
+
+  button {
+    background-color: rgba(228, 68, 68, 0.705);
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    outline: inherit;
+    text-decoration: none;
+    color: white;
+    letter-spacing: 1px;
+    font-size: 16px;
+    text-transform: uppercase;
+    transition: 0.2s;
+    &:hover {
+      border: 2px solid white;
+    }
+  }
+
+  & > button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  img {
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+  }
+
+  form.photoForm {
+    text-align: center;
+    & > button,
+    input.photoInput {
+      display: block;
+      width: 60%;
+      height: 30px;
+      transform: translateX(40%);
+    }
+  }
+
+  p:nth-of-type(1) {
+    margin-top: 50px;
+  }
+  p {
+    padding: 5px 20px;
+
+    span {
+      font-weight: bold;
+    }
+  }
 }

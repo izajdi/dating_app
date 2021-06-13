@@ -33,7 +33,7 @@ public class User {
 
 
     @Column(name = "gender")
-    private Character gender;
+    private String gender;
 
     @Column(name = "description")
     private String description;
@@ -74,7 +74,7 @@ public class User {
         return city;
     }
 
-    public Character getGender() {return gender;}
+    public String getGender() {return gender;}
 
     public String getDescription() {
         return description;
@@ -96,7 +96,7 @@ public class User {
         private String email;
         private String country;
         private String city;
-        private Character gender;
+        private String gender;
         private String description;
         private String password;
         private Photo photo;
@@ -138,7 +138,7 @@ public class User {
             return this;
         }
 
-        public UserBuilder gender(Character gender) {
+        public UserBuilder gender(String gender) {
             this.gender = gender;
             return this;
         }

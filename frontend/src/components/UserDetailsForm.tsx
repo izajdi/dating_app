@@ -60,7 +60,7 @@ const UserDetailsForm = ({userId,name,email,dateOfBirthday,country,city,gender,d
 
 
   const buildUserObject = ():any=>{
-
+    console.log(gender);
 
     const user = {
         name:newName,
@@ -68,9 +68,9 @@ const UserDetailsForm = ({userId,name,email,dateOfBirthday,country,city,gender,d
         email:newEmail,
         country:newCountry,
         city:newCity,
-        gender:gender,
+        gender:newGender,
         description:newDescription,
-        password:passwordHash(newPassword)
+        password:newPassword ? passwordHash(newPassword) : passwordHash(oldPassword)
         
         
     
@@ -131,6 +131,7 @@ if(passwordHash(oldPassword) !== password){
     return;
 }
 
+    if(newPassword!=="" && newPassword2 !==""){
     if(!regexpPass.test(newPassword) || newPassword.length<6){
         alert('slabe hasło');
         return;
@@ -139,6 +140,7 @@ if(passwordHash(oldPassword) !== password){
         alert('inne hasła');
         return;
     }
+}
 
     
     editUserObject();
@@ -149,7 +151,8 @@ if(passwordHash(oldPassword) !== password){
     //    const userJson =JSON.stringify(buildUserObject()) ;
 
         // console.log(userJson);
-        // console.log(userId);
+        console.log(buildUserObject());
+
 
         const requestOptions = {
             method: 'PUT',
@@ -180,7 +183,7 @@ if(passwordHash(oldPassword) !== password){
 
 
   const formUserDetails = <>
-          <form>
+          <form className="userDetailsForm">
             <label htmlFor="registerNameId">
                 Imie:
                 <input id="registerNameId" value={newName} onChange={handleOnNameChange} type="text" required/>
