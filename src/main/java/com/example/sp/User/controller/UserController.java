@@ -44,7 +44,6 @@ public class UserController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("user/{id}")
     public ResponseEntity<User> updateUser(@PathVariable("id") Long id, @RequestBody User user) {
-        System.out.println(user.getGender());
         Optional<User> currentUserDate = userRepository.findById(id);
         return currentUserDate
                 .map(value -> new ResponseEntity<>(userRepository.save(userService.getUserEntityToUpdate(value, user)),
