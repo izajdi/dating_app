@@ -79,10 +79,10 @@ public class UserService {
     }
 
     private String getCurrentGender(User currentUser, User userToUpdate) {
-        if(userToUpdate.getPassword().isEmpty()) {
-            return currentUser.getPassword();
+        if(userToUpdate.getGender().isEmpty()) {
+            return currentUser.getGender();
         }
-        return userToUpdate.getPassword();
+        return userToUpdate.getGender();
     }
 
     private String getCurrentInterest(User currentUser, User userToUpdate) {
