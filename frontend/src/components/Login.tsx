@@ -44,7 +44,7 @@ const Login = ({logIn}:UserPageLoginProps) => {
             country:"",
             city:"",
             description:"",
-            password:passwordHash(password)
+            password:passwordHash(password),
 
       }
 

@@ -60,7 +60,6 @@ const UserDetailsForm = ({userId,name,email,dateOfBirthday,country,city,gender,d
 
 
   const buildUserObject = ():any=>{
-    console.log(gender);
 
     const user = {
         name:newName,
@@ -70,50 +69,38 @@ const UserDetailsForm = ({userId,name,email,dateOfBirthday,country,city,gender,d
         city:newCity,
         gender:newGender,
         description:newDescription,
-        password:newPassword ? passwordHash(newPassword) : passwordHash(oldPassword)
-        
-        
-    
+        password:newPassword ? passwordHash(newPassword) : passwordHash(oldPassword),
+        interests:"interestsId"
+
     }
 
     return user;
-
 
 }
 
   const handleEditUser = (e)=>{
     e.preventDefault();
     
-    
-
-
     if(newName.length===0){
         alert('podaj imie');
         return;
     
     }
-
     if(!regexpEmail.test(newEmail)){
 
         alert('bledny mail');
         return;
-
-
     }
-
     if(Number(newBirthDate.slice(0,4)) > year-14){
         
         alert("Nie masz 14 lat");
         return;
 
-}
-
+    }
     if(newCountry.length===0){
         alert('podaj kraj');
         return;
     }
-
-
     if(newCity.length===0){
         alert('podaj miasto');
         return;
