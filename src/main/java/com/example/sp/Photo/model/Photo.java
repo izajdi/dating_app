@@ -8,17 +8,24 @@ import java.util.List;
 public class Photo {
 
     @Id
+    private Long id;
+
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "value")
-    private String value;
+    @Lob
+    @Column(name = "photo", columnDefinition = "BLOB")
+    private byte[] photo;
+
+    public Long getId() {
+        return id;
+    }
 
     public Long getUserId() {
         return userId;
     }
 
-    public String getValue() {
-        return value;
+    public byte[] getPhoto() {
+        return photo;
     }
 }

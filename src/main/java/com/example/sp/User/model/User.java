@@ -1,11 +1,8 @@
 package com.example.sp.User.model;
 
-import com.example.sp.Photo.model.Photo;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
-import java.util.Collections;
-import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -15,14 +12,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name ="name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name ="date_of_birthday")
+    @Column(name = "date_of_birthday")
     private String dateOfBirthday;
 
     @NonNull
-    @Column(name ="email",unique = true)
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "country")
@@ -38,7 +35,7 @@ public class User {
     private String description;
 
     @NonNull
-    @Column(name ="password")
+    @Column(name = "password")
     private String password;
 
     @Column(name = "interests")
@@ -75,7 +72,9 @@ public class User {
         return city;
     }
 
-    public String getGender() {return gender;}
+    public String getGender() {
+        return gender;
+    }
 
     public String getDescription() {
         return description;
@@ -94,10 +93,9 @@ public class User {
     }
 
     public void setLikedUserId(String id) {
-        if(likedUserId == null) {
+        if (likedUserId == null) {
             likedUserId = id;
-        }
-        else{
+        } else {
             this.likedUserId = String.format("%s, %s", likedUserId, id);
         }
     }
