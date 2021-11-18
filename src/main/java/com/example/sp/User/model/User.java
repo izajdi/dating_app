@@ -44,6 +44,9 @@ public class User {
     @Column(name = "likedUserId")
     private String likedUserId;
 
+    @Lob
+    private Byte[] image;
+
     public User() {
 
     }
@@ -98,6 +101,10 @@ public class User {
         } else {
             this.likedUserId = String.format("%s, %s", likedUserId, id);
         }
+    }
+
+    public void setImage(Byte[] image) {
+        this.image = image;
     }
 
     public static final class UserBuilder {
