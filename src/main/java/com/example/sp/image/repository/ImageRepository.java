@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.util.Optional;
 
 @Repository
 public class ImageRepository {
@@ -20,14 +21,22 @@ public class ImageRepository {
         try {
             User user = userRepository.findById(userId)
                     .orElseThrow(() -> new IllegalStateException("User with given id is not present in db"));
-            Byte[] byteImage = new Byte[file.getBytes().length];
-            int i = 0;
-            for (byte b : file.getBytes()) {
-                byteImage[i++] = b;
-            }
+            byte[] byteImage = file.getBytes();
+            user.setImage(byteImage);
             userRepository.save(user);
         } catch (IOException e) {
             throw new IllegalStateException("Something went wrong during uplouding photo");
         }
+    }
+
+    @Transactional
+    public byte[] getImage(Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isPresent()) {
+            if (user.get().getImage() != null) {
+                return user.get().getImage();
+            }
+        }
+        return new byte[0];
     }
 }

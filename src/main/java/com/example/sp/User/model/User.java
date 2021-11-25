@@ -1,5 +1,6 @@
 package com.example.sp.User.model;
 
+import org.hibernate.annotations.Type;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
@@ -45,7 +46,8 @@ public class User {
     private String likedUserId;
 
     @Lob
-    private Byte[] image;
+    @Type(type = "org.hibernate.type.ImageType")
+    private byte[] image;
 
     public User() {
 
@@ -91,6 +93,10 @@ public class User {
         return interests;
     }
 
+    public byte[] getImage() {
+        return image;
+    }
+
     public String getLikedUserId() {
         return likedUserId;
     }
@@ -103,7 +109,7 @@ public class User {
         }
     }
 
-    public void setImage(Byte[] image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 
