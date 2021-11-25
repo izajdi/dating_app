@@ -45,10 +45,6 @@ public class User {
     @Column(name = "likedUserId")
     private String likedUserId;
 
-    @Lob
-    @Type(type = "org.hibernate.type.ImageType")
-    private byte[] image;
-
     public User() {
 
     }
@@ -93,10 +89,6 @@ public class User {
         return interests;
     }
 
-    public byte[] getImage() {
-        return image;
-    }
-
     public String getLikedUserId() {
         return likedUserId;
     }
@@ -107,10 +99,6 @@ public class User {
         } else {
             this.likedUserId = String.format("%s, %s", likedUserId, id);
         }
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
     }
 
     public static final class UserBuilder {
