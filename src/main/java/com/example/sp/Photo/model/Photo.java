@@ -17,6 +17,10 @@ public class Photo {
     @Column(name = "photo", columnDefinition = "BYTEA")
     private byte[] photo;
 
+    public Photo() {
+
+    }
+
     public Long getId() {
         return id;
     }
