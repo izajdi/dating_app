@@ -1,5 +1,7 @@
 package com.example.sp.image.model;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -12,7 +14,7 @@ public class Image {
     private Long userId;
 
     @Lob
-    @Column(name = "image", columnDefinition = "BYTEA")
+    @Type(type = "org.hibernate.type.ImageType")
     private byte[] image;
 
     private Image(Builder builder) {
@@ -22,6 +24,10 @@ public class Image {
 
     public Image() {
 
+    }
+
+    public static Builder builder() {
+        return new Builder();
     }
 
     public Long getUserId() {
@@ -35,11 +41,6 @@ public class Image {
     public void setImage(byte[] image) {
         this.image = image;
     }
-
-    public static Builder builder() {
-        return new Builder();
-    }
-
 
     public static final class Builder {
         private Long userId;

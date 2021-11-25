@@ -4,11 +4,13 @@ import com.example.sp.error.model.Error;
 import com.example.sp.error.model.ErrorCode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
+@Repository
 public class ErrorMapper {
 
     private static Map<ErrorCode, HttpStatus> errorCodeToHttpCode = Map.of(ErrorCode.USER_WITH_GIVEN_ID_HAVE_IMAGE_ALREADY_ASSIGNED_ERROR, HttpStatus.BAD_REQUEST,
