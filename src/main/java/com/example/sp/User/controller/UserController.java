@@ -1,7 +1,6 @@
 package com.example.sp.User.controller;
 
 
-import com.example.sp.Photo.model.Photo;
 import com.example.sp.User.model.User;
 import com.example.sp.User.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
