@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import com.example.sp.User.repository.UserRepository;
+import com.example.sp.user.repository.UserRepository;
 
 @SpringBootApplication
 public class SpProject2021Application implements CommandLineRunner {

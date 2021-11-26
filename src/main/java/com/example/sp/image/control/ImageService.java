@@ -1,19 +1,19 @@
 package com.example.sp.image.control;
 
-import com.example.sp.User.repository.UserRepository;
 import com.example.sp.error.model.Error;
 import com.example.sp.error.model.ErrorCode;
 import com.example.sp.image.model.Image;
 import com.example.sp.image.repository.ImageRepository;
+import com.example.sp.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.Optional;
 
-@Repository
+@Service
 public class ImageService {
 
     @Autowired
@@ -45,6 +45,15 @@ public class ImageService {
         return Optional.empty();
     }
 
+    public Optional<Error> validateForUpload(Long userId) {
+        if (!userRepository.existsById(userId)) {
+            return Optional.of(new Error(String.format("User with given id: %d does not exist in db, so uplouding image is impossible", userId),
+                    ErrorCode.NO_USER_WITH_GIVEN_ID_ERROR));
+        }
+        return Optional.empty();
+    }
+
+    @Transactional
     public void save(Long userId, MultipartFile file) {
         try {
             Image image = buildImage(userId, file.getBytes());
@@ -62,6 +71,22 @@ public class ImageService {
             return image.getImage();
         }
         return new byte[0];
+    }
+
+    @Transactional
+    public void upload(Long userId, MultipartFile file) {
+        Optional<Image> image = imageRepository.findById(userId);
+        if (image.isEmpty()) {
+            save(userId, file);
+            return;
+        }
+        try {
+            byte[] byteImage = file.getBytes();
+            image.get().setImage(byteImage);
+            imageRepository.save(image.get());
+        } catch (IOException e) {
+            throw new IllegalStateException("Something went wrong during converting image to byte array");
+        }
     }
 
     private Image buildImage(Long userId, byte[] byteImage) {

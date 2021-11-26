@@ -1,6 +1,5 @@
-package com.example.sp.User.model;
+package com.example.sp.user.model;
 
-import org.hibernate.annotations.Type;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;

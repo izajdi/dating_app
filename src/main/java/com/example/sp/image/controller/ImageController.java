@@ -17,12 +17,17 @@ public class ImageController {
     ImageProxy proxy;
 
     @PostMapping("addImage/{user_id}")
-    public ResponseEntity addPhoto(@RequestParam("file") MultipartFile file, @PathVariable("user_id") Long userId) {
+    public ResponseEntity addImage(@RequestParam("file") MultipartFile file, @PathVariable("user_id") Long userId) {
         return proxy.saveImage(userId, file);
     }
 
     @GetMapping(value = "image/{user_id}")
     public void renderImage(@PathVariable("user_id") Long userId, HttpServletResponse response) throws Exception {
         proxy.renderImage(userId, response);
+    }
+
+    @PutMapping(value = "uploadImage/{user_id}")
+    public ResponseEntity uploadImage(@RequestParam("file") MultipartFile file, @PathVariable("user_id") Long userId) {
+        return proxy.uploadImage(userId, file);
     }
 }
