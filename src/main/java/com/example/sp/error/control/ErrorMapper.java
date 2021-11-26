@@ -14,7 +14,8 @@ import java.util.Map;
 public class ErrorMapper {
 
     private static Map<ErrorCode, HttpStatus> errorCodeToHttpCode = Map.of(ErrorCode.USER_WITH_GIVEN_ID_HAVE_IMAGE_ALREADY_ASSIGNED_ERROR, HttpStatus.BAD_REQUEST,
-            ErrorCode.NO_USER_WITH_GIVEN_ID_ERROR, HttpStatus.METHOD_NOT_ALLOWED, ErrorCode.NO_IMAGE_FOR_GIVEN_USER, HttpStatus.BAD_REQUEST);
+            ErrorCode.NO_USER_WITH_GIVEN_ID_ERROR, HttpStatus.METHOD_NOT_ALLOWED, ErrorCode.NO_IMAGE_FOR_GIVEN_USER, HttpStatus.BAD_REQUEST,
+            ErrorCode.NO_USER_PREFERENCES_FOR_GIVEN_USER_ERROR, HttpStatus.BAD_REQUEST);
 
     public ResponseEntity<String> mapToResponseEntity(Error error) {
         HttpStatus httpStatus = errorCodeToHttpCode.getOrDefault(error.getErrorCode(), HttpStatus.BAD_REQUEST);

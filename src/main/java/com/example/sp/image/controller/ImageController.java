@@ -10,23 +10,23 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/image")
 public class ImageController {
 
     @Autowired
     ImageProxy proxy;
 
-    @PostMapping("addImage/{user_id}")
+    @PostMapping("add/{user_id}")
     public ResponseEntity addImage(@RequestParam("file") MultipartFile file, @PathVariable("user_id") Long userId) {
         return proxy.saveImage(userId, file);
     }
 
-    @GetMapping(value = "image/{user_id}")
+    @GetMapping(value = "get/{user_id}")
     public void renderImage(@PathVariable("user_id") Long userId, HttpServletResponse response) throws Exception {
         proxy.renderImage(userId, response);
     }
 
-    @PutMapping(value = "uploadImage/{user_id}")
+    @PutMapping(value = "upload/{user_id}")
     public ResponseEntity uploadImage(@RequestParam("file") MultipartFile file, @PathVariable("user_id") Long userId) {
         return proxy.uploadImage(userId, file);
     }
