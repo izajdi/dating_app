@@ -15,6 +15,24 @@ const LoginPage = () => {
     const [login,setLogin] = useState("");
     // const [password,setPassword] = useState("");
     const [isLogged,setIsLogged] = useState(false);
+    const [currentUser, setCurrentUser] = useState('');
+
+
+    const strzelDoApi = (requestOptions) => {
+        fetch('http://localhost:8080/api/login', requestOptions)
+            .then(response => {
+                if(response.status === 200){
+                    handleOnLoginChange('');
+                    sessionStorage.setItem('login', login)
+                    return response.json();
+                }else if(response.status===401){
+                    alert("Nieprawidłowe dane!")
+                }
+            }).then(res => setCurrentUser(res))
+            .catch(err => console.log(err));
+
+
+    }
 
     // const handleOnLoginChange = (e:React.FormEvent<HTMLInputElement>) => setLogin(e.currentTarget.value);
     // const handleOnPassChange = (e:React.FormEvent<HTMLInputElement>) => setPassword(e.currentTarget.value);
@@ -30,7 +48,7 @@ const LoginPage = () => {
 
     useEffect(() => {
       const loggedIn = sessionStorage.getItem("login");
-      
+      console.log(loggedIn);
       if (loggedIn) {
         
         setLogin(loggedIn);
@@ -38,8 +56,10 @@ const LoginPage = () => {
       }
     }, []);
 
+    console.log(login);
+
   return (
-    isLogged ? <UserPage login={login} logOut={handleOnLogOut} /> : <Login   logIn={handleOnLoginChange}/>
+    isLogged ? <UserPage user={currentUser} login={login} logOut={handleOnLogOut} /> : <Login  handleLogin={strzelDoApi} logIn={handleOnLoginChange}/>
     
   );
 }

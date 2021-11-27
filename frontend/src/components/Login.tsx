@@ -10,18 +10,19 @@ var passwordHash = require('md5');
 
 
 type UserPageLoginProps = {
-  logIn:any
+  logIn:any,
+    handleLogin: (user) => void,
 }
 
-const Login = ({logIn}:UserPageLoginProps) => {
+const Login: React.FC<UserPageLoginProps> = ({logIn, handleLogin}) => {
 
     
     const [login,setLogin] = useState("");
     const [password,setPassword] = useState("");
+    const [user, setUser] = useState('');
 
     const handleOnLoginChange = (e:React.FormEvent<HTMLInputElement>) => setLogin(e.currentTarget.value);
     const handleOnPassChange = (e:React.FormEvent<HTMLInputElement>) => setPassword(e.currentTarget.value);
-
 
     const handleLogIn = (e)=>{
         e.preventDefault();
@@ -61,19 +62,7 @@ const Login = ({logIn}:UserPageLoginProps) => {
         body: JSON.stringify(loginCredentials) 
     };
 
-    fetch('http://localhost:8080/api/login', requestOptions)
-    .then(response => {
-      if(response.status === 200){
-          logIn(login);
-          sessionStorage.setItem('login', login)
-          return response.json();
-      }else if(response.status===401){
-        alert("Nieprawidłowe dane!")
-      }
-    })
-    .catch(err => console.log(err));
-
-
+        handleLogin(requestOptions);
 
     }
 

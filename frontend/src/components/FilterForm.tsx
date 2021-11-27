@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
-import '../styles/FilterForm.scss'
+import '../styles/FilterForm.scss';
+import TextField from '@mui/material/TextField';
 
 type FilterFormProps = {
   handleFilter: any,
@@ -41,6 +42,7 @@ const FilterForm = ({handleFilter,refresh}:FilterFormProps) => {
 
           <label htmlFor="ageMin">
                 Wiek min <br/>
+
                 <input id="ageMin" type="number" min="0" max="99" value={ageMin} onChange={handleAgeMinChange}/>
             </label> 
             <label htmlFor="ageMax">

@@ -16,16 +16,19 @@ public class ImageController {
     @Autowired
     ImageProxy proxy;
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("add/{user_id}")
     public ResponseEntity addImage(@RequestParam("file") MultipartFile file, @PathVariable("user_id") Long userId) {
         return proxy.saveImage(userId, file);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping(value = "get/{user_id}")
     public void renderImage(@PathVariable("user_id") Long userId, HttpServletResponse response) throws Exception {
         proxy.renderImage(userId, response);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping(value = "upload/{user_id}")
     public ResponseEntity uploadImage(@RequestParam("file") MultipartFile file, @PathVariable("user_id") Long userId) {
         return proxy.uploadImage(userId, file);

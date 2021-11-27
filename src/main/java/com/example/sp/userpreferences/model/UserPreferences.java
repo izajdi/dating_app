@@ -17,10 +17,10 @@ public class UserPreferences {
     private String gender;
 
     @Column(name = "below_age")
-    private String belowAge;
+    private int belowAge;
 
     @Column(name = "upper_age")
-    private String upperAge;
+    private int upperAge;
 
     @Column(name = "interest")
     private String interest;
@@ -33,11 +33,11 @@ public class UserPreferences {
         return gender;
     }
 
-    public String getBelowAge() {
+    public int getBelowAge() {
         return belowAge;
     }
 
-    public String getUpperAge() {
+    public int getUpperAge() {
         return belowAge;
     }
 

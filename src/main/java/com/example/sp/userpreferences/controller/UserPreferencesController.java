@@ -14,16 +14,19 @@ public class UserPreferencesController {
     UserPreferencesProxy proxy;
 
     @PostMapping("add")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity add(@RequestBody UserPreferences userPreferences) {
         return proxy.save(userPreferences);
     }
 
     @GetMapping("get/{user_id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity get(@PathVariable("user_id") Long userId) {
         return proxy.get(userId);
     }
 
     @GetMapping("getPossibleMatch/{user_id}")
+    @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity getProposedUsers(@PathVariable("user_id") Long userId) {
         return proxy.getUsersToMatch(userId);
     }
