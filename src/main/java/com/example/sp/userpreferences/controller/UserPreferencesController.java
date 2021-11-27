@@ -22,4 +22,9 @@ public class UserPreferencesController {
     public ResponseEntity get(@PathVariable("user_id") Long userId) {
         return proxy.get(userId);
     }
+
+    @GetMapping("getPossibleMatch/{user_id}")
+    public ResponseEntity getProposedUsers(@PathVariable("user_id") Long userId) {
+        return proxy.getUsersToMatch(userId);
+    }
 }
