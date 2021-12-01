@@ -1,4 +1,4 @@
-package com.example.sp.error.model;
+package com.example.sp.common.error.model;
 
 import java.util.Objects;
 

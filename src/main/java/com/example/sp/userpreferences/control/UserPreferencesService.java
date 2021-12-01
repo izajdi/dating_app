@@ -1,7 +1,7 @@
 package com.example.sp.userpreferences.control;
 
-import com.example.sp.error.model.Error;
-import com.example.sp.error.model.ErrorCode;
+import com.example.sp.common.error.model.Error;
+import com.example.sp.common.validators.UserPreferencesExistenceValidator;
 import com.example.sp.user.model.User;
 import com.example.sp.user.repository.UserRepository;
 import com.example.sp.userpreferences.model.UserPreferences;
@@ -22,6 +22,8 @@ public class UserPreferencesService {
     UserRepository userRepository;
     @Autowired
     UserPreferencesRepository userPreferencesRepository;
+    @Autowired
+    UserPreferencesExistenceValidator userPreferencesExistenceValidator;
 
     public List<User> getProposedUsersInProperOrder(Long userId) {
         UserPreferences userPreferences = userPreferencesRepository.findById(userId)
@@ -33,11 +35,7 @@ public class UserPreferencesService {
     }
 
     public Optional<Error> validate(Long userId) {
-        if (!userPreferencesRepository.existsById(userId)) {
-            return Optional.of(new Error(String.format("Cannot find UserPreferences for user with id: %d", userId),
-                    ErrorCode.NO_USER_PREFERENCES_FOR_GIVEN_USER_ERROR));
-        }
-        return Optional.empty();
+        return userPreferencesExistenceValidator.validate(userId);
     }
 
     private int countAge(String dateOfBirthday) {

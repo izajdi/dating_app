@@ -1,7 +1,7 @@
 package com.example.sp.image.control;
 
-import com.example.sp.error.control.ErrorMapper;
-import com.example.sp.error.model.Error;
+import com.example.sp.common.error.control.ErrorMapper;
+import com.example.sp.common.error.model.Error;
 import com.example.sp.image.repository.ImageRepository;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +24,6 @@ public class ImageProxy {
     @Autowired
     ErrorMapper errorMapper;
 
-    public ResponseEntity saveImage(Long userId, MultipartFile file) {
-        Optional<Error> error = imageService.validateForSave(userId);
-        if (error.isPresent()) {
-            return errorMapper.mapToResponseEntity(error.get());
-        }
-        imageService.save(userId, file);
-        return ResponseEntity.ok(String.format("Image was saved for user with id: %d", userId));
-    }
 
     public void renderImage(Long userId, HttpServletResponse response) throws Exception {
         Optional<Error> error = imageService.validateForRender(userId);

@@ -1,7 +1,7 @@
 package com.example.sp.userpreferences.control;
 
-import com.example.sp.error.control.ErrorMapper;
-import com.example.sp.error.model.Error;
+import com.example.sp.common.error.control.ErrorMapper;
+import com.example.sp.common.error.model.Error;
 import com.example.sp.user.model.User;
 import com.example.sp.userpreferences.model.UserPreferences;
 import com.example.sp.userpreferences.repository.UserPreferencesRepository;

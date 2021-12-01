@@ -24,10 +24,4 @@ public class UserPreferencesController {
     public ResponseEntity get(@PathVariable("user_id") Long userId) {
         return proxy.get(userId);
     }
-
-    @GetMapping("getPossibleMatch/{user_id}")
-    @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity getProposedUsers(@PathVariable("user_id") Long userId) {
-        return proxy.getUsersToMatch(userId);
-    }
 }
