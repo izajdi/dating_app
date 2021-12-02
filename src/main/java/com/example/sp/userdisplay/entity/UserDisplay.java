@@ -9,15 +9,39 @@ public class UserDisplay {
     private final int age;
     private final String description;
     private final String interests;
-    private final byte[] image;
+    private final String image;
 
     private UserDisplay(Builder builder) {
         userId = Objects.requireNonNull(builder.userId);
         name = Objects.requireNonNull(builder.name);
         age = builder.age;
         description = Objects.requireNonNull(builder.description);
-        interests = Objects.requireNonNull(builder.interests);
+        interests = builder.interests;
         image = Objects.requireNonNull(builder.image);
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getInterests() {
+        return interests;
+    }
+
+    public String getImage() {
+        return image;
     }
 
     public static Builder builder() {
@@ -30,7 +54,7 @@ public class UserDisplay {
         private int age;
         private String description;
         private String interests;
-        private byte[] image;
+        private String image;
 
         private Builder() {
         }
@@ -60,7 +84,7 @@ public class UserDisplay {
             return this;
         }
 
-        public Builder image(byte[] image) {
+        public Builder image(String image) {
             this.image = image;
             return this;
         }

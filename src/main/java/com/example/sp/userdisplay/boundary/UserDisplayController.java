@@ -11,7 +11,7 @@ public class UserDisplayController {
     @Autowired
     UserDisplayProxy proxy;
 
-    @GetMapping("get/{user_id}")
+    @GetMapping("getPotentialMatches/{user_id}")
     @CrossOrigin(origins = "http://localhost:3000")
     public ResponseEntity get(@PathVariable("user_id") Long userId) {
         return proxy.get(userId);

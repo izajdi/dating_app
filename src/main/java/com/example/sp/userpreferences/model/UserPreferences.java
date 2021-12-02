@@ -38,7 +38,7 @@ public class UserPreferences {
     }
 
     public int getUpperAge() {
-        return belowAge;
+        return upperAge;
     }
 
     public String getInterest() {
