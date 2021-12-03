@@ -13,10 +13,10 @@ public class UserPreferencesController {
     @Autowired
     UserPreferencesProxy proxy;
 
-    @PostMapping("add")
+    @PutMapping("update")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity add(@RequestBody UserPreferences userPreferences) {
-        return proxy.save(userPreferences);
+    public ResponseEntity update(@RequestBody UserPreferences userPreferences) {
+        return proxy.update(userPreferences);
     }
 
     @GetMapping("get/{user_id}")

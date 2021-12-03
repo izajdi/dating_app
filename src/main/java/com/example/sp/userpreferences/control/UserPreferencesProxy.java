@@ -22,7 +22,7 @@ public class UserPreferencesProxy {
     @Autowired
     ErrorMapper errorMapper;
 
-    public ResponseEntity save(UserPreferences userPreferences) {
+    public ResponseEntity update(UserPreferences userPreferences) {
         repository.save(userPreferences);
         return ResponseEntity
                 .ok(String.format("UserPrefernces was saved for user with id: %d", userPreferences.getUserId()));

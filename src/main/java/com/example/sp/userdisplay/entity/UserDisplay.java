@@ -16,7 +16,7 @@ public class UserDisplay {
         name = Objects.requireNonNull(builder.name);
         age = builder.age;
         description = Objects.requireNonNull(builder.description);
-        interests = builder.interests;
+        interests = Objects.requireNonNull(builder.interests);
         image = Objects.requireNonNull(builder.image);
     }
 
