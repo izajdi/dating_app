@@ -1,15 +1,14 @@
-package com.example.sp.userpreferences.control;
+package com.example.sp.userpreferences.boundary;
 
 import com.example.sp.common.error.control.ErrorMapper;
 import com.example.sp.common.error.model.Error;
-import com.example.sp.user.model.User;
-import com.example.sp.userpreferences.model.UserPreferences;
-import com.example.sp.userpreferences.repository.UserPreferencesRepository;
+import com.example.sp.common.validators.userpreferences.UserPreferencesExistenceValidator;
+import com.example.sp.userpreferences.entity.UserPreferences;
+import com.example.sp.userpreferences.control.UserPreferencesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -18,7 +17,7 @@ public class UserPreferencesProxy {
     @Autowired
     UserPreferencesRepository repository;
     @Autowired
-    UserPreferencesService service;
+    UserPreferencesExistenceValidator userPreferencesExistenceValidator;
     @Autowired
     ErrorMapper errorMapper;
 
@@ -29,18 +28,12 @@ public class UserPreferencesProxy {
     }
 
     public ResponseEntity get(Long userId) {
-        Optional<Error> error = service.validate(userId);
+        Optional<UserPreferences> userPreferences = repository.findById(userId);
+        Optional<Error> error = userPreferencesExistenceValidator.validate(userPreferences, userId);
         if (error.isPresent()) {
             return errorMapper.mapToResponseEntity(error.get());
         }
-        Optional<UserPreferences> userPreferences = repository.findById(userId);
         return ResponseEntity
                 .ok(userPreferences.get());
     }
-
-    public ResponseEntity getUsersToMatch(Long userId) {
-        List<User> proposedUsersInProperOrder = service.getProposedUsersInProperOrder(userId);
-        return ResponseEntity.ok(proposedUsersInProperOrder);
-    }
-
 }

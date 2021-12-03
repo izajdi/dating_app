@@ -1,12 +1,12 @@
-package com.example.sp.user.service;
+package com.example.sp.user.control;
 
-import com.example.sp.user.model.User;
+import com.example.sp.user.entity.User;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
 
-    public void addLikedUserId(User user, Long id) {
+    public void updateLikedUserId(User user, Long id) {
         user.setLikedUserId(String.valueOf(id));
     }
 

@@ -1,7 +1,6 @@
-package com.example.sp.userpreferences.controller;
+package com.example.sp.userpreferences.boundary;
 
-import com.example.sp.userpreferences.control.UserPreferencesProxy;
-import com.example.sp.userpreferences.model.UserPreferences;
+import com.example.sp.userpreferences.entity.UserPreferences;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

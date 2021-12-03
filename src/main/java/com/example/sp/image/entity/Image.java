@@ -1,4 +1,4 @@
-package com.example.sp.image.model;
+package com.example.sp.image.entity;
 
 import org.hibernate.annotations.Type;
 

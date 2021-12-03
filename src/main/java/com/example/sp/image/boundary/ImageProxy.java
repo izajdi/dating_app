@@ -1,8 +1,9 @@
-package com.example.sp.image.control;
+package com.example.sp.image.boundary;
 
 import com.example.sp.common.error.control.ErrorMapper;
 import com.example.sp.common.error.model.Error;
-import com.example.sp.image.repository.ImageRepository;
+import com.example.sp.image.control.ImageService;
+import com.example.sp.image.control.ImageRepository;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

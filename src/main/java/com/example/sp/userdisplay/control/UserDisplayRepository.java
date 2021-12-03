@@ -1,12 +1,12 @@
 package com.example.sp.userdisplay.control;
 
-import com.example.sp.image.model.Image;
-import com.example.sp.image.repository.ImageRepository;
-import com.example.sp.user.model.User;
-import com.example.sp.user.repository.UserRepository;
+import com.example.sp.image.entity.Image;
+import com.example.sp.image.control.ImageRepository;
+import com.example.sp.user.entity.User;
+import com.example.sp.user.control.UserRepository;
 import com.example.sp.userdisplay.entity.UserDisplay;
-import com.example.sp.userpreferences.model.UserPreferences;
-import com.example.sp.userpreferences.repository.UserPreferencesRepository;
+import com.example.sp.userpreferences.entity.UserPreferences;
+import com.example.sp.userpreferences.control.UserPreferencesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

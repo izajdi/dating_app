@@ -1,4 +1,4 @@
-package com.example.sp.userpreferences.model;
+package com.example.sp.userpreferences.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

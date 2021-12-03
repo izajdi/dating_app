@@ -1,6 +1,6 @@
-package com.example.sp.userpreferences.repository;
+package com.example.sp.userpreferences.control;
 
-import com.example.sp.userpreferences.model.UserPreferences;
+import com.example.sp.userpreferences.entity.UserPreferences;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

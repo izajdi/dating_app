@@ -1,6 +1,6 @@
-package com.example.sp.user.repository;
+package com.example.sp.user.control;
 
-import com.example.sp.user.model.User;
+import com.example.sp.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,4 +12,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
     List<User> findAllByGender(String gender);
+
+    boolean existsUserByEmail(String email);
 }

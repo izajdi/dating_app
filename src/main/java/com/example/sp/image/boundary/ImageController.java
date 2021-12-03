@@ -1,6 +1,6 @@
-package com.example.sp.image.controller;
+package com.example.sp.image.boundary;
 
-import com.example.sp.image.control.ImageProxy;
+import com.example.sp.image.boundary.ImageProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,11 +1,10 @@
 package com.example.sp.image.control;
 
 import com.example.sp.common.error.model.Error;
-import com.example.sp.common.validators.ImageExistenceValidator;
-import com.example.sp.common.validators.UserExistenceValidator;
-import com.example.sp.image.model.Image;
-import com.example.sp.image.repository.ImageRepository;
-import com.example.sp.user.repository.UserRepository;
+import com.example.sp.common.validators.image.ImageExistenceValidator;
+import com.example.sp.common.validators.user.UserExistenceValidator;
+import com.example.sp.image.entity.Image;
+import com.example.sp.user.control.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -49,7 +48,6 @@ public class ImageService {
         }
     }
 
-    @Transactional
     public byte[] get(Long userId) {
         Image image = imageRepository.findById(userId)
                 .orElseThrow(() -> new IllegalStateException("Image should be present on this stage"));

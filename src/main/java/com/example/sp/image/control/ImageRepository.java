@@ -1,6 +1,6 @@
-package com.example.sp.image.repository;
+package com.example.sp.image.control;
 
-import com.example.sp.image.model.Image;
+import com.example.sp.image.entity.Image;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
