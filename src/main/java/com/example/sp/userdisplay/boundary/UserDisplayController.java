@@ -13,7 +13,13 @@ public class UserDisplayController {
 
     @GetMapping("getPotentialMatches/{user_id}")
     @CrossOrigin(origins = "http://localhost:3000")
-    public ResponseEntity get(@PathVariable("user_id") Long userId) {
-        return proxy.get(userId);
+    public ResponseEntity getPotentialMatches(@PathVariable("user_id") Long userId) {
+        return proxy.getPotentialMatches(userId);
+    }
+
+    @GetMapping("getMatches/{user_id}")
+    @CrossOrigin(origins = "http://localhost:3000")
+    public ResponseEntity getMatches(@PathVariable("user_id") Long userId) {
+        return proxy.getMatches(userId);
     }
 }

@@ -96,7 +96,7 @@ public class User {
         if (likedUserId == null) {
             likedUserId = id;
         } else {
-            this.likedUserId = String.format("%s, %s", likedUserId, id);
+            this.likedUserId = String.format("%s,%s", likedUserId, id);
         }
     }
 

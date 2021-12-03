@@ -22,12 +22,21 @@ public class UserDisplayProxy {
     @Autowired
     ErrorMapper errorMapper;
 
-    public ResponseEntity get(Long userId) {
+    public ResponseEntity getPotentialMatches(Long userId) {
         Optional<Error> error = userExistenceValidator.validate(userId);
         if (error.isPresent()) {
             return errorMapper.mapToResponseEntity(error.get());
         }
         List<UserDisplay> potentialMatch = userDisplayRepository.getPotentialMatch(userId);
         return ResponseEntity.ok(potentialMatch);
+    }
+
+    public ResponseEntity getMatches(Long userId) {
+        Optional<Error> error = userExistenceValidator.validate(userId);
+        if (error.isPresent()) {
+            return errorMapper.mapToResponseEntity(error.get());
+        }
+        List<UserDisplay> matches = userDisplayRepository.getMatches(userId);
+        return ResponseEntity.ok(matches);
     }
 }
