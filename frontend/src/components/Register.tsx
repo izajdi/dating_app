@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import '../styles/Register.scss';
+import {Redirect} from 'react-router';
 
 
 // var passwordHash = require('password-hash');
@@ -13,46 +14,46 @@ const Register = () => {
 
     const today = new Date();
     const year = today.getFullYear();
-    const month = (today.getMonth()+1)>9 ? today.getMonth()+1 : `0${today.getMonth()+1}` ;
-    const day = today.getDate()>=10 ? today.getDate() : "0"+today.getDate();
-    const _date = [year,month,day].join('-');
+    const month = (today.getMonth() + 1) > 9 ? today.getMonth() + 1 : `0${today.getMonth() + 1}`;
+    const day = today.getDate() >= 10 ? today.getDate() : "0" + today.getDate();
+    const _date = [year, month, day].join('-');
 
 
+    const [name, setName] = useState("");
+    const [mail, setMail] = useState("");
+    const [birthDate, setBirthDate] = useState(_date);
+    const [country, setCountry] = useState("");
+    const [city, setCity] = useState("");
+    const [gender, setGender] = useState("");
+    const [password, setPassword] = useState("");
+    const [password2, setPassword2] = useState("");
+    const [intrested, setIntersted] = useState("");
+    const [description, setDescription] = useState("");
+    // userPreferences
     
-    const [name,setName] = useState("");
-    const [mail,setMail] = useState("");
-    const [birthDate,setBirthDate] = useState(_date);
-    const [country,setCountry] = useState("");
-    const [city,setCity] = useState("");
-    const [gender,setGender] = useState("");
-    const [password,setPassword] = useState("");
-    const [password2,setPassword2] = useState("");
 
-
-
-    const handleOnNameChange = (e:React.FormEvent<HTMLInputElement>) => setName(e.currentTarget.value);
-    const handleOnEmailChange = (e:React.FormEvent<HTMLInputElement>) => setMail(e.currentTarget.value);
-    const handleOnBirthdateChange = (e:React.FormEvent<HTMLInputElement>) => setBirthDate(e.currentTarget.value);
-    const handleOnCountryChange = (e:React.FormEvent<HTMLInputElement>) => setCountry(e.currentTarget.value);
-    const handleOnCityChange = (e:React.FormEvent<HTMLInputElement>) => setCity(e.currentTarget.value);
+    const handleOnNameChange = (e: React.FormEvent<HTMLInputElement>) => setName(e.currentTarget.value);
+    const handleOnEmailChange = (e: React.FormEvent<HTMLInputElement>) => setMail(e.currentTarget.value);
+    const handleOnBirthdateChange = (e: React.FormEvent<HTMLInputElement>) => setBirthDate(e.currentTarget.value);
+    const handleOnCountryChange = (e: React.FormEvent<HTMLInputElement>) => setCountry(e.currentTarget.value);
+    const handleOnCityChange = (e: React.FormEvent<HTMLInputElement>) => setCity(e.currentTarget.value);
 
     const handleOnGenderChange = (e: React.FormEvent<HTMLSelectElement>) => setGender(e.currentTarget.value);
 
-    const handleOnPass1Change = (e:React.FormEvent<HTMLInputElement>) => setPassword(e.currentTarget.value);
-    const handleOnPass2Change = (e:React.FormEvent<HTMLInputElement>) => setPassword2(e.currentTarget.value);
+    const handleOnPass1Change = (e: React.FormEvent<HTMLInputElement>) => setPassword(e.currentTarget.value);
+    const handleOnPass2Change = (e: React.FormEvent<HTMLInputElement>) => setPassword2(e.currentTarget.value);
+    const handleOnIntrestChange = (e: React.FormEvent<HTMLInputElement>) => setIntersted(e.currentTarget.value);
+    const handleOnDescriptionChange= (e: React.FormEvent<HTMLInputElement>) => setDescription(e.currentTarget.value);
 
 
-
-    const handleAddUser = (e)=>{
-        e.preventDefault();
-
-        if(name.length===0){
+    const handleAddUser = () => {
+        if (name.length === 0) {
             alert('podaj imie');
             return;
-        
+
         }
 
-        if(!regexpEmail.test(mail)){
+        if (!regexpEmail.test(mail)) {
 
             alert('bledny mail');
             return;
@@ -60,166 +61,157 @@ const Register = () => {
 
         }
 
-        if(Number(birthDate.slice(0,4)) > year-14){
-            
+        if (Number(birthDate.slice(0, 4)) > year - 14) {
             alert("Nie masz 14 lat");
             return;
-    
-    }
+        }
 
-        if(country.length===0){
+        if (country.length === 0) {
             alert('podaj kraj');
             return;
         }
 
 
-        if(city.length===0){
+        if (city.length === 0) {
             alert('podaj miasto');
             return;
         }
 
-    if(gender==="" ){
-        alert("podaj plec");
-        return;
-    }
-            
-    
-        if(!regexpPass.test(password) || password.length<6){
-            alert('slabe hasło');
+        if (gender === "") {
+            alert("podaj plec");
             return;
         }
-        if(password !== password2){
+        if (password !== password2) {
             alert('inne hasła');
             return;
         }
-
-        
         sendUserObject();
-
+       return <Redirect to="/" />
     }
 
 
-    
-
-    const buildUserObject = ():any=>{
+    const buildUserObject = (): any => {
 
 
         const user = {
-            name:name,
-            dateOfBirthday:birthDate, 
-            email:mail,
-            country:country,
-            city:city,
-            gender:gender,
-            description:`Mam na imie ${name}`,
-            password:passwordHash(password)
-            
-            
-        
+            name: name,
+            dateOfBirthday: birthDate,
+            email: mail,
+            country: country,
+            city: city,
+            gender: gender,
+            description: description,
+            interests: intrested,
+            password:password
         }
 
         return user;
-
-
     }
 
 
-    const clearForm =()=> {
+    const clearForm = () => {
         setName("");
         setMail("");
         setBirthDate(_date);
-        setCountry("") 
+        setCountry("")
         setCity("");
 
         setGender("");
 
-        setPassword(""); 
+        setPassword("");
         setPassword2("");
 
     }
 
     const sendUserObject = () => {
-    //     console.log(buildUserObject())
-    //    const userJson =JSON.stringify(buildUserObject()) ;
+        //     console.log(buildUserObject())
+        //    const userJson =JSON.stringify(buildUserObject()) ;
 
-    //     console.log(userJson);
+        //     console.log(userJson);
 
         const requestOptions = {
             method: 'POST',
-            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-            body: JSON.stringify(buildUserObject()) 
+            headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+            body: JSON.stringify(buildUserObject())
         };
 
         fetch('http://localhost:8080/api/user/add', requestOptions)
-        .then(response => {
-            if(response.status === 200){
-                alert("Użytkownik zarejestrowany!");
-                clearForm();
-                return  response.json();
-            }
-            else if(response.status ===422){
-                alert("Użytkownik o podanym adresie email juz istnieje!");
-            }else{
-                alert("Rejestracja nieudana. Spróbuj ponownie!");
-            }
-        })
-        .then(data =>console.log(data))
-        .catch(err => console.log(err));
+            .then(response => {
+                if (response.status === 200) {
+                    alert("Użytkownik zarejestrowany!");
+                    clearForm();
+                    return response.json();
+                } else if (response.status === 422) {
+                    alert("Użytkownik o podanym adresie email juz istnieje!");
+                } else {
+                    alert("Rejestracja nieudana. Spróbuj ponownie!");
+                }
+            })
+            .then(data => console.log(data))
+            .catch(err => console.log(err));
 
     }
 
     console.log(_date);
-  return (
-    
+    return (
 
 
-    <div className="register">
-        <form>
-            <div>   
-            <label htmlFor="registerNameId">
-                Imie:
-                <input id="registerNameId" value={name} onChange={handleOnNameChange} type="text" required/>
-            </label>    
-            <label htmlFor="registerMailId">
-                E-mail:
-                <input id="registerMailId" value={mail} onChange={handleOnEmailChange} type="text"/>
-            </label> 
-            <label htmlFor="registerBirthDateId">
-                Data urodzenia: 
-                <input id="registerBirthDateId"  value={birthDate} max={_date} onChange={handleOnBirthdateChange} type="date"/>
-            </label> 
-            <label htmlFor="registerCountryId">
-                Kraj:
-                <input id="registerCountryId" value={country} onChange={handleOnCountryChange} type="text"/>
-            </label> 
-            <label htmlFor="registerCityId">
-                Miasto:
-                <input id="registerCityId" value={city} onChange={handleOnCityChange} type="text"/>
-            </label> 
-            <label htmlFor="registerGendersId">
-                Płec:
-                <select id="registerGendersId"  value={gender} onChange={handleOnGenderChange} >
-                    <option value=""></option>
-                    <option value="K">K</option>
-                    <option value="M" >M</option>
-                </select>
-            </label> 
-           
-            <label htmlFor="registerPassID">
-                Hasło:
-                <input id="registerPassID" value={password} onChange={handleOnPass1Change} type="password"/>
-            </label> 
-            <label htmlFor="registerPass2ID">
-                Powtórz hasło:
-                <input id="registerPass2ID" value={password2} onChange={handleOnPass2Change} type="password"/>
-            </label> 
-            
+        <div className="register">
+            <form action="http://localhost:3000/">
+                <div>
+                    <label htmlFor="registerNameId">
+                        Imie:
+                        <input id="registerNameId" value={name} onChange={handleOnNameChange} type="text" required/>
+                    </label>
+                    <label htmlFor="registerMailId">
+                        E-mail:
+                        <input id="registerMailId" value={mail} onChange={handleOnEmailChange} type="text"/>
+                    </label>
+                    <label htmlFor="registerBirthDateId">
+                        Data urodzenia:
+                        <input id="registerBirthDateId" value={birthDate} max={_date} onChange={handleOnBirthdateChange}
+                               type="date"/>
+                    </label>
+                    <label htmlFor="registerCountryId">
+                        Kraj:
+                        <input id="registerCountryId" value={country} onChange={handleOnCountryChange} type="text"/>
+                    </label>
+                    <label htmlFor="registerCityId">
+                        Miasto:
+                        <input id="registerCityId" value={city} onChange={handleOnCityChange} type="text"/>
+                    </label>
+                    <label htmlFor="registerGendersId">
+                        Płec:
+                        <select id="registerGendersId" value={gender} onChange={handleOnGenderChange}>
+                            <option value=""></option>
+                            <option value="K">K</option>
+                            <option value="M">M</option>
+                        </select>
+                    </label>
 
-            <button onClick={handleAddUser} >Zarejestruj</button>
-            </div>
-        </form>  
-    </div>
-  );
+                    <label htmlFor="registerPassID">
+                        Hasło:
+                        <input id="registerPassID" value={password} onChange={handleOnPass1Change} type="password"/>
+                    </label>
+                    <label htmlFor="registerPass2ID">
+                        Powtórz hasło:
+                        <input id="registerPass2ID" value={password2} onChange={handleOnPass2Change} type="password"/>
+                    </label>
+                    <label htmlFor="registerIntrestedID">
+                        Zainteresowania:
+                        <input id="registerIntrestedID" value={intrested} onChange={handleOnIntrestChange} type="text"/>
+                    </label>
+                    <label htmlFor="registerDescriptionID">
+                        Opis:
+                        <input id="registerDescriptionID" value={description} onChange={handleOnDescriptionChange} type="text"/>
+                    </label>
+
+
+                    <button onClick={handleAddUser}>Zarejestruj</button>
+                </div>
+            </form>
+        </div>
+    );
 }
 
 export default Register;
