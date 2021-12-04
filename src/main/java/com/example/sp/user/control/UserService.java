@@ -22,6 +22,7 @@ public class UserService {
                 .password(getCurrentPassword(currentUser, userToUpdate))
                 .gender(getCurrentGender(currentUser, userToUpdate))
                 .interests(getCurrentInterest(currentUser, userToUpdate))
+                .likedUserId(currentUser.getLikedUserId())
                 .build();
     }
 

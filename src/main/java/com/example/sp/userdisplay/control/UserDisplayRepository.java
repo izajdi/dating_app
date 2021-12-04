@@ -58,6 +58,9 @@ public class UserDisplayRepository {
     }
 
     private boolean areUsersMatch(User user, Long userId) {
+        if (user.getLikedUserId() == null) {
+            return false;
+        }
         return user.getLikedUserId().contains(String.valueOf(userId));
     }
 
@@ -73,6 +76,9 @@ public class UserDisplayRepository {
     }
 
     private boolean doesUsersHaveSameInterests(User user, UserPreferences userPreferences) {
+        if (user.getInterests() == null) {
+            return false;
+        }
         return userPreferences.getInterest().toLowerCase().equals(user.getInterests().toLowerCase());
     }
 

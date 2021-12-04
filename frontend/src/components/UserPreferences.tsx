@@ -19,7 +19,7 @@ interface IUserPreferences {
     userId: number,
 }
 const UserPreferences: React.FC<IUserPreferences> = ({userId}) => {
-    const url = `http://localhost:8080/preferences/add`;
+    const url = `http://localhost:8080/preferences/update`;
     const [gender, setGender] = React.useState('');
     const [belowAge, setBelowAge] = React.useState(0);
     const [upperAge, setUpperAge] = React.useState(0);
@@ -49,7 +49,7 @@ const UserPreferences: React.FC<IUserPreferences> = ({userId}) => {
             interest
         }
         try {
-            await axios.post(url, userPref)
+            await axios.put(url, userPref)
         } catch (e) {
             return <p>Sth went wrong...</p>
         }

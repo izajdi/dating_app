@@ -28,10 +28,10 @@ const UserDetailsForm = ({userId,name,email,dateOfBirthday,country,city,gender,d
     const day = today.getDate()>=10 ? today.getDate() : "0"+today.getDate();
     const _date = [year,month,day].join('-');
 
-  
 
-  
-  
+
+
+
 
   const [newName,setNewName] = useState(name || "");
   const [newEmail,setNewMail] = useState(email || "");
@@ -63,13 +63,13 @@ const UserDetailsForm = ({userId,name,email,dateOfBirthday,country,city,gender,d
 
     const user = {
         name:newName,
-        dateOfBirthday:newBirthDate, 
+        dateOfBirthday:newBirthDate,
         email:newEmail,
         country:newCountry,
         city:newCity,
         gender:newGender,
         description:newDescription,
-        password:newPassword ? passwordHash(newPassword) : passwordHash(oldPassword),
+        password:newPassword ? newPassword : oldPassword,
         interests:"interestsId"
 
     }
@@ -80,11 +80,11 @@ const UserDetailsForm = ({userId,name,email,dateOfBirthday,country,city,gender,d
 
   const handleEditUser = (e)=>{
     e.preventDefault();
-    
+
     if(newName.length===0){
         alert('podaj imie');
         return;
-    
+
     }
     if(!regexpEmail.test(newEmail)){
 
@@ -92,7 +92,7 @@ const UserDetailsForm = ({userId,name,email,dateOfBirthday,country,city,gender,d
         return;
     }
     if(Number(newBirthDate.slice(0,4)) > year-14){
-        
+
         alert("Nie masz 14 lat");
         return;
 
@@ -110,26 +110,22 @@ const UserDetailsForm = ({userId,name,email,dateOfBirthday,country,city,gender,d
 //     alert("podaj plec");
 //     return;
 // }
-        
 
 
-if(passwordHash(oldPassword) !== password){
+
+if(oldPassword !== password){
     alert('Stare hasło nieprawidłowe');
     return;
 }
 
     if(newPassword!=="" && newPassword2 !==""){
-    if(!regexpPass.test(newPassword) || newPassword.length<6){
-        alert('slabe hasło');
-        return;
-    }
     if(newPassword !== newPassword2){
         alert('inne hasła');
         return;
     }
 }
 
-    
+
     editUserObject();
   }
 
@@ -142,9 +138,9 @@ if(passwordHash(oldPassword) !== password){
 
 
         const requestOptions = {
-            method: 'PUT',
+            method: 'PATCH',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-            body: JSON.stringify(buildUserObject()) 
+            body: JSON.stringify(buildUserObject())
         };
 
         fetch(`http://localhost:8080/api/user/${userId}`, requestOptions)
@@ -174,23 +170,23 @@ if(passwordHash(oldPassword) !== password){
             <label htmlFor="registerNameId">
                 Imie:
                 <input id="registerNameId" value={newName} onChange={handleOnNameChange} type="text" required/>
-            </label>    
+            </label>
             <label htmlFor="registerMailId">
                 E-mail:
                 <input id="registerMailId" value={newEmail} onChange={handleOnEmailChange} type="text"/>
-            </label> 
+            </label>
             <label htmlFor="registerBirthDateId">
-                Data urodzenia: 
+                Data urodzenia:
                 <input id="registerBirthDateId"  value={newBirthDate} max={_date} onChange={handleOnBirthdateChange} type="date" disabled/>
-            </label> 
+            </label>
             <label htmlFor="registerCountryId">
                 Kraj:
                 <input id="registerCountryId" value={newCountry} onChange={handleOnCountryChange} type="text"/>
-            </label> 
+            </label>
             <label htmlFor="registerCityId">
                 Miasto:
                 <input id="registerCityId" value={newCity} onChange={handleOnCityChange} type="text"/>
-            </label> 
+            </label>
             <label htmlFor="registerGendersId">
                 Płec:
                 <select id="registerGendersId"  value={gender} onChange={handleOnGenderChange} disabled>
@@ -198,35 +194,35 @@ if(passwordHash(oldPassword) !== password){
                     <option value="K">K</option>
                     <option value="M" >M</option>
                 </select>
-            </label> 
+            </label>
             <label htmlFor="descriptionId">
                 Opis:
                 <textarea id="descriptionId" value={newDescription} onChange={handleOnDescriptionChange} />
-            </label> 
+            </label>
             <label htmlFor="registerOldPassID">
                 Stare Hasło:
                 <input id="registerOldPassID" value={oldPassword} onChange={handleOnOldPassChange} type="password"/>
-            </label> 
+            </label>
             <label htmlFor="registerPassID">
                 Nowe Hasło:
                 <input id="registerPassID" value={newPassword} onChange={handleOnPass1Change} type="password"/>
-            </label> 
+            </label>
             <label htmlFor="registerPass2ID">
                 Powtórz hasło:
                 <input id="registerPass2ID" value={newPassword2} onChange={handleOnPass2Change} type="password"/>
-            </label> 
-            
+            </label>
+
 
             <button onClick={handleEditUser} >Zatwierdz</button>
-        </form> 
+        </form>
 
                         </>
 
   return (
     <div className="userDetailForm" >
         {formUserDetails}
-        
-        
+
+
     </div>
   );
 }

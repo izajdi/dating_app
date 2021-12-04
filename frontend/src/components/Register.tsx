@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import '../styles/Register.scss';
+import {Redirect} from 'react-router';
 
 
 // var passwordHash = require('password-hash');
@@ -26,6 +27,8 @@ const Register = () => {
     const [gender, setGender] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
+    const [intrested, setIntersted] = useState("");
+    const [description, setDescription] = useState("");
     // userPreferences
     
 
@@ -39,11 +42,11 @@ const Register = () => {
 
     const handleOnPass1Change = (e: React.FormEvent<HTMLInputElement>) => setPassword(e.currentTarget.value);
     const handleOnPass2Change = (e: React.FormEvent<HTMLInputElement>) => setPassword2(e.currentTarget.value);
+    const handleOnIntrestChange = (e: React.FormEvent<HTMLInputElement>) => setIntersted(e.currentTarget.value);
+    const handleOnDescriptionChange= (e: React.FormEvent<HTMLInputElement>) => setDescription(e.currentTarget.value);
 
 
-    const handleAddUser = (e) => {
-        e.preventDefault();
-
+    const handleAddUser = () => {
         if (name.length === 0) {
             alert('podaj imie');
             return;
@@ -83,6 +86,7 @@ const Register = () => {
             return;
         }
         sendUserObject();
+       return <Redirect to="/" />
     }
 
 
@@ -96,8 +100,9 @@ const Register = () => {
             country: country,
             city: city,
             gender: gender,
-            description: `Mam na imie ${name}`,
-            password: passwordHash(password)
+            description: description,
+            interests: intrested,
+            password:password
         }
 
         return user;
@@ -152,7 +157,7 @@ const Register = () => {
 
 
         <div className="register">
-            <form>
+            <form action="http://localhost:3000/">
                 <div>
                     <label htmlFor="registerNameId">
                         Imie:
@@ -191,6 +196,14 @@ const Register = () => {
                     <label htmlFor="registerPass2ID">
                         Powtórz hasło:
                         <input id="registerPass2ID" value={password2} onChange={handleOnPass2Change} type="password"/>
+                    </label>
+                    <label htmlFor="registerIntrestedID">
+                        Zainteresowania:
+                        <input id="registerIntrestedID" value={intrested} onChange={handleOnIntrestChange} type="text"/>
+                    </label>
+                    <label htmlFor="registerDescriptionID">
+                        Opis:
+                        <input id="registerDescriptionID" value={description} onChange={handleOnDescriptionChange} type="text"/>
                     </label>
 
 

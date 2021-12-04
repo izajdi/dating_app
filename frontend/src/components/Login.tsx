@@ -45,12 +45,8 @@ const Login: React.FC<UserPageLoginProps> = ({logIn, handleLogin}) => {
             country:"",
             city:"",
             description:"",
-            password:passwordHash(password),
-
+            password:password,
       }
-
-      
-      
 
       // if zalogowal sie to wywolujemy metode logIn i zmieniamy state dla LoginPage -> przenosimy sie do strony UserPage
       // logIn(login);
