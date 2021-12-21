@@ -7,6 +7,7 @@ import com.example.sp.user.entity.User;
 import com.example.sp.userdisplay.entity.UserDisplay;
 import com.example.sp.userpreferences.control.UserPreferencesRepository;
 import com.example.sp.userpreferences.entity.UserPreferences;
+import com.example.sp.userranking.UserRankingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,32 +24,36 @@ public class UserDisplayRepository {
     UserPreferencesRepository userPreferencesRepository;
     @Autowired
     ImageRepository imageRepository;
+    @Autowired
+    UserRankingService userRankingService;
 
     public List<UserDisplay> getPotentialMatch(Long userId) {
         UserPreferences userPreferences = userPreferencesRepository.findById(userId)
                 .orElseThrow(() -> new IllegalStateException("UserPreferences should be present on this stage"));
-        List<Long> likedUsersIds = getLikedUsersIds(userId);
-        List<User> sortedPossibleMatches = userRepository.findAllByGender(userPreferences.getGender()).stream()
-                .filter(user -> !likedUsersIds.contains(user.getId()))
-                .filter(user -> !user.getId().equals(userId))
-                .filter(user -> isPossibleUserToMatchInProperAge(user.getDateOfBirthday(), userPreferences.getBelowAge(), userPreferences.getUpperAge()))
-                .sorted(Comparator.comparing(user -> doesUsersHaveSameInterests(user, userPreferences), Comparator.reverseOrder()))
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalStateException("User should be present on this stage"));
+        List<Long> likedUsersIds = getLikedUsersIds(user, userId);
+        List<User> usersToDisplay = userRepository.findAllByGender(userPreferences.getGender()).stream()
+                .filter(userToSort -> !likedUsersIds.contains(userToSort.getId()))
+                .filter(userToSort -> !userToSort.getId().equals(userId))
+                .filter(userToSort -> isPossibleUserToMatchInProperAge(userToSort.getDateOfBirthday(), userPreferences.getBelowAge(), userPreferences.getUpperAge()))
+                .sorted(Comparator.comparing(userToSort -> userRankingService.getUserRanking(user, userToSort), Comparator.reverseOrder()))
                 .collect(Collectors.toList());
-        return getUserDisplays(sortedPossibleMatches);
+        return getUserDisplays(usersToDisplay);
     }
 
     public List<UserDisplay> getMatches(Long userId) {
-        List<Long> likedUsersIds = getLikedUsersIds(userId);
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalStateException("User should be present on this stage"));
+        List<Long> likedUsersIds = getLikedUsersIds(user, userId);
         List<User> likedUsers = userRepository.findAllById(likedUsersIds);
         List<User> matches = likedUsers.stream()
-                .filter(user -> areUsersMatch(user, userId))
+                .filter(likedUser -> areUsersMatch(likedUser, userId))
                 .collect(Collectors.toList());
         return getUserDisplays(matches);
     }
 
-    private List<Long> getLikedUsersIds(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalStateException("User should be present on this stage"));
+    private List<Long> getLikedUsersIds(User user, Long userId) {
         if (user.getLikedUserId() != null) {
             return Arrays.stream(user.getLikedUserId().split(","))
                     .map(Long::valueOf)
