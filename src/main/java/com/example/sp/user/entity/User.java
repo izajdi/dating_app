@@ -38,6 +38,9 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "mbti_type")
+    private String mbtiType;
+
     @Column(name = "interests")
     private String interests;
 
@@ -45,7 +48,6 @@ public class User {
     private String likedUserId;
 
     public User() {
-
     }
 
     public Long getId() {
@@ -92,6 +94,10 @@ public class User {
         return likedUserId;
     }
 
+    public String getMbtiType() {
+        return mbtiType;
+    }
+
     public void setLikedUserId(String id) {
         if (likedUserId == null) {
             likedUserId = id;
@@ -112,6 +118,7 @@ public class User {
         private String password;
         private String interests;
         private String likedUserId;
+        private String mbtiType;
 
         private UserBuilder() {
         }
@@ -175,6 +182,11 @@ public class User {
             return this;
         }
 
+        public UserBuilder mbtiType(String mbtiType) {
+            this.mbtiType = mbtiType;
+            return this;
+        }
+
         public User build() {
             User user = new User();
             user.password = this.password;
@@ -188,6 +200,7 @@ public class User {
             user.country = this.country;
             user.interests = this.interests;
             user.likedUserId = this.likedUserId;
+            user.mbtiType = this.mbtiType;
             return user;
         }
     }
