@@ -28,9 +28,10 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
     const [intrested, setIntersted] = useState("");
+    const [mbtiType, setMbtiType] = useState("");
     const [description, setDescription] = useState("");
     // userPreferences
-    
+
 
     const handleOnNameChange = (e: React.FormEvent<HTMLInputElement>) => setName(e.currentTarget.value);
     const handleOnEmailChange = (e: React.FormEvent<HTMLInputElement>) => setMail(e.currentTarget.value);
@@ -43,7 +44,8 @@ const Register = () => {
     const handleOnPass1Change = (e: React.FormEvent<HTMLInputElement>) => setPassword(e.currentTarget.value);
     const handleOnPass2Change = (e: React.FormEvent<HTMLInputElement>) => setPassword2(e.currentTarget.value);
     const handleOnIntrestChange = (e: React.FormEvent<HTMLInputElement>) => setIntersted(e.currentTarget.value);
-    const handleOnDescriptionChange= (e: React.FormEvent<HTMLInputElement>) => setDescription(e.currentTarget.value);
+    const handleOnMbtiTypeChange = (e: React.FormEvent<HTMLSelectElement>) => setMbtiType(e.currentTarget.value);
+    const handleOnDescriptionChange = (e: React.FormEvent<HTMLInputElement>) => setDescription(e.currentTarget.value);
 
 
     const handleAddUser = () => {
@@ -86,7 +88,7 @@ const Register = () => {
             return;
         }
         sendUserObject();
-       return <Redirect to="/" />
+        return <Redirect to="/"/>
     }
 
 
@@ -102,7 +104,7 @@ const Register = () => {
             gender: gender,
             description: description,
             interests: intrested,
-            password:password
+            password: password
         }
 
         return user;
@@ -189,6 +191,29 @@ const Register = () => {
                         </select>
                     </label>
 
+                    <label htmlFor="registerMbtiType">
+                        Typ osobowosci MBTI:
+                        <select id="registerGendersId" value={mbtiType} onChange={handleOnMbtiTypeChange}>
+                            <option value=""></option>
+                            <option value="INFP">INFP</option>
+                            <option value="ENFP">ENFP</option>
+                            <option value="INFJ">INFJ</option>
+                            <option value="ENFJ">ENFJ</option>
+                            <option value="INTJ">INTJ</option>
+                            <option value="ENTJ">ENTJ</option>
+                            <option value="INTP">INTP</option>
+                            <option value="ENTP">ENTP</option>
+                            <option value="ISFP">ISFP</option>
+                            <option value="ESFP">ESFP</option>
+                            <option value="ISTP">ISTP</option>
+                            <option value="ESTP">ESTP</option>
+                            <option value="ISFJ">ISFJ</option>
+                            <option value="ESFJ">ESFJ</option>
+                            <option value="ISTJ">ISTJ</option>
+                            <option value="ESTJ">ESTJ</option>
+                        </select>
+                    </label>
+
                     <label htmlFor="registerPassID">
                         Hasło:
                         <input id="registerPassID" value={password} onChange={handleOnPass1Change} type="password"/>
@@ -203,7 +228,8 @@ const Register = () => {
                     </label>
                     <label htmlFor="registerDescriptionID">
                         Opis:
-                        <input id="registerDescriptionID" value={description} onChange={handleOnDescriptionChange} type="text"/>
+                        <input id="registerDescriptionID" value={description} onChange={handleOnDescriptionChange}
+                               type="text"/>
                     </label>
 
 
