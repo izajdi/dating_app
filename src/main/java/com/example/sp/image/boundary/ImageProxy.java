@@ -1,7 +1,7 @@
 package com.example.sp.image.boundary;
 
 import com.example.sp.common.error.control.ErrorMapper;
-import com.example.sp.common.error.model.Error;
+import com.example.sp.common.error.entity.Error;
 import com.example.sp.image.control.ImageService;
 import com.example.sp.image.control.ImageRepository;
 import org.apache.tomcat.util.http.fileupload.IOUtils;

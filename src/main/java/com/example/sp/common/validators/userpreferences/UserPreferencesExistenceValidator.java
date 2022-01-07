@@ -1,7 +1,7 @@
 package com.example.sp.common.validators.userpreferences;
 
-import com.example.sp.common.error.model.Error;
-import com.example.sp.common.error.model.ErrorCode;
+import com.example.sp.common.error.entity.Error;
+import com.example.sp.common.error.entity.ErrorCode;
 import com.example.sp.userpreferences.entity.UserPreferences;
 import com.example.sp.userpreferences.control.UserPreferencesRepository;
 import org.springframework.beans.factory.annotation.Autowired;

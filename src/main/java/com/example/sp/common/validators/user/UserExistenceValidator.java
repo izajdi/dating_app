@@ -1,7 +1,7 @@
 package com.example.sp.common.validators.user;
 
-import com.example.sp.common.error.model.Error;
-import com.example.sp.common.error.model.ErrorCode;
+import com.example.sp.common.error.entity.Error;
+import com.example.sp.common.error.entity.ErrorCode;
 import com.example.sp.user.entity.User;
 import com.example.sp.user.control.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

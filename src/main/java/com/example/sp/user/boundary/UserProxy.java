@@ -1,7 +1,7 @@
 package com.example.sp.user.boundary;
 
 import com.example.sp.common.error.control.ErrorMapper;
-import com.example.sp.common.error.model.Error;
+import com.example.sp.common.error.entity.Error;
 import com.example.sp.common.validators.user.UserEmailExistenceValidator;
 import com.example.sp.common.validators.user.UserExistenceValidator;
 import com.example.sp.user.control.UserRepository;

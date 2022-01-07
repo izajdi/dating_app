@@ -1,7 +1,7 @@
 package com.example.sp.common.validators.image;
 
-import com.example.sp.common.error.model.Error;
-import com.example.sp.common.error.model.ErrorCode;
+import com.example.sp.common.error.entity.Error;
+import com.example.sp.common.error.entity.ErrorCode;
 import com.example.sp.image.control.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

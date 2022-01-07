@@ -1,7 +1,7 @@
 package com.example.sp.userpreferences.boundary;
 
 import com.example.sp.common.error.control.ErrorMapper;
-import com.example.sp.common.error.model.Error;
+import com.example.sp.common.error.entity.Error;
 import com.example.sp.common.validators.userpreferences.UserPreferencesExistenceValidator;
 import com.example.sp.userpreferences.entity.UserPreferences;
 import com.example.sp.userpreferences.control.UserPreferencesRepository;

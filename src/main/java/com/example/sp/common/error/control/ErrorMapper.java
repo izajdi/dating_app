@@ -1,7 +1,7 @@
 package com.example.sp.common.error.control;
 
-import com.example.sp.common.error.model.Error;
-import com.example.sp.common.error.model.ErrorCode;
+import com.example.sp.common.error.entity.Error;
+import com.example.sp.common.error.entity.ErrorCode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
