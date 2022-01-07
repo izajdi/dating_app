@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import '../styles/Register.scss';
 import {Redirect} from 'react-router';
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 
 
 // var passwordHash = require('password-hash');
@@ -27,7 +30,7 @@ const Register = () => {
     const [gender, setGender] = useState("");
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
-    const [intrested, setIntersted] = useState("");
+    const [intrested, setIntrested] = React.useState("");
     const [mbtiType, setMbtiType] = useState("");
     const [description, setDescription] = useState("");
     // userPreferences
@@ -43,8 +46,11 @@ const Register = () => {
 
     const handleOnPass1Change = (e: React.FormEvent<HTMLInputElement>) => setPassword(e.currentTarget.value);
     const handleOnPass2Change = (e: React.FormEvent<HTMLInputElement>) => setPassword2(e.currentTarget.value);
-    const handleOnIntrestChange = (e: React.FormEvent<HTMLInputElement>) => setIntersted(e.currentTarget.value);
+    const handleOnIntrestChange = (e) => setIntrested((prev) =>
+        prev !== "" ? prev + "," + e.target.value : e.target.value
+    );
     const handleOnMbtiTypeChange = (e: React.FormEvent<HTMLSelectElement>) => setMbtiType(e.currentTarget.value);
+    const handleOnInterestsChange = (e: React.FormEvent<HTMLSelectElement>) => setMbtiType(e.currentTarget.value);
     const handleOnDescriptionChange = (e: React.FormEvent<HTMLInputElement>) => setDescription(e.currentTarget.value);
 
 
@@ -104,6 +110,7 @@ const Register = () => {
             gender: gender,
             description: description,
             interests: intrested,
+            mbtiType: mbtiType,
             password: password
         }
 
@@ -214,6 +221,32 @@ const Register = () => {
                         </select>
                     </label>
 
+                    <label id="checkbox">
+                        Wybierz zainteresowania:
+                        <FormGroup>
+                            <FormControlLabel
+                                control={<Checkbox onClick={handleOnIntrestChange} />}
+                                value="zwierzeta"
+                                label="zwierzeta"
+                            />
+                            <FormControlLabel
+                                control={<Checkbox onClick={handleOnIntrestChange} />}
+                                label="sport"
+                                value="sport"
+                            />
+                            <FormControlLabel
+                                control={<Checkbox onClick={handleOnIntrestChange} />}
+                                label="ksiazki"
+                                value="ksiazki"
+                            />
+                            <FormControlLabel
+                                control={<Checkbox onClick={handleOnIntrestChange} />}
+                                label="filmy"
+                                value="filmy"
+                            />
+                        </FormGroup>
+                    </label>
+
                     <label htmlFor="registerPassID">
                         Hasło:
                         <input id="registerPassID" value={password} onChange={handleOnPass1Change} type="password"/>
@@ -222,17 +255,11 @@ const Register = () => {
                         Powtórz hasło:
                         <input id="registerPass2ID" value={password2} onChange={handleOnPass2Change} type="password"/>
                     </label>
-                    <label htmlFor="registerIntrestedID">
-                        Zainteresowania:
-                        <input id="registerIntrestedID" value={intrested} onChange={handleOnIntrestChange} type="text"/>
-                    </label>
                     <label htmlFor="registerDescriptionID">
                         Opis:
                         <input id="registerDescriptionID" value={description} onChange={handleOnDescriptionChange}
                                type="text"/>
                     </label>
-
-
                     <button onClick={handleAddUser}>Zarejestruj</button>
                 </div>
             </form>

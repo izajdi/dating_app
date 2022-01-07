@@ -1,7 +1,7 @@
 package com.example.sp.userdisplay.boundary;
 
 import com.example.sp.common.error.control.ErrorMapper;
-import com.example.sp.common.error.model.Error;
+import com.example.sp.common.error.entity.Error;
 import com.example.sp.common.validators.user.UserExistenceValidator;
 import com.example.sp.userdisplay.control.UserDisplayRepository;
 import com.example.sp.userdisplay.entity.UserDisplay;

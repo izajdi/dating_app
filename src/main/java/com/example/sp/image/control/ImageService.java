@@ -1,6 +1,6 @@
 package com.example.sp.image.control;
 
-import com.example.sp.common.error.model.Error;
+import com.example.sp.common.error.entity.Error;
 import com.example.sp.common.validators.image.ImageExistenceValidator;
 import com.example.sp.common.validators.user.UserExistenceValidator;
 import com.example.sp.image.entity.Image;

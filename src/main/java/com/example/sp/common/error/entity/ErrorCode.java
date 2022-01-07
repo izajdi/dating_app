@@ -1,4 +1,4 @@
-package com.example.sp.common.error.model;
+package com.example.sp.common.error.entity;
 
 public enum ErrorCode {
     NO_USER_WITH_GIVEN_ID_ERROR,

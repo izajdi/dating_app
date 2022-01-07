@@ -66,12 +66,15 @@ public class UserRankingService {
             entry("ESTJ", ESTJ));
 
     public int getUserRanking(User currentUser, User userToCount) {
-        MbtiTypeEnum currentUserMbti = mapToMbtiTypeEnum(currentUser.getMbtiType());
-        MbtiTypeEnum userToCountMbti = mapToMbtiTypeEnum(userToCount.getMbtiType());
         Set<String> currentUserInterests = Arrays.stream(currentUser.getInterests().split(","))
                 .collect(Collectors.toSet());
         Set<String> userToCountInterests = Arrays.stream(userToCount.getInterests().split(","))
                 .collect(Collectors.toSet());
+        if (currentUser.getMbtiType().isEmpty() || userToCount.getMbtiType().isEmpty()) {
+            return countInterestsCompatibility(currentUserInterests, userToCountInterests);
+        }
+        MbtiTypeEnum currentUserMbti = mapToMbtiTypeEnum(currentUser.getMbtiType());
+        MbtiTypeEnum userToCountMbti = mapToMbtiTypeEnum(userToCount.getMbtiType());
         return countCompatibility(currentUserMbti, userToCountMbti) +
                 countInterestsCompatibility(currentUserInterests, userToCountInterests);
     }
