@@ -4,6 +4,7 @@ import {Redirect} from 'react-router';
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import Grid from "@mui/material/Grid";
 
 
 // var passwordHash = require('password-hash');
@@ -35,6 +36,11 @@ const Register = () => {
     const [description, setDescription] = useState("");
     // userPreferences
 
+    const removeIntret = (intrestes, intrest) => {
+        const newInt = intrestes.filter((i) => i !== intrest);
+        setIntrested(newInt.join(","));
+    };
+
 
     const handleOnNameChange = (e: React.FormEvent<HTMLInputElement>) => setName(e.currentTarget.value);
     const handleOnEmailChange = (e: React.FormEvent<HTMLInputElement>) => setMail(e.currentTarget.value);
@@ -46,9 +52,14 @@ const Register = () => {
 
     const handleOnPass1Change = (e: React.FormEvent<HTMLInputElement>) => setPassword(e.currentTarget.value);
     const handleOnPass2Change = (e: React.FormEvent<HTMLInputElement>) => setPassword2(e.currentTarget.value);
-    const handleOnIntrestChange = (e) => setIntrested((prev) =>
-        prev !== "" ? prev + "," + e.target.value : e.target.value
-    );
+    const handleOnIntrestChange = (e) => {
+        if (e.target.checked) {
+            return setIntrested((prev) =>
+                prev !== "" ? prev + "," + e.target.value : e.target.value
+            );
+        }
+        return removeIntret(intrested.split(","), e.target.value);
+    }
     const handleOnMbtiTypeChange = (e: React.FormEvent<HTMLSelectElement>) => setMbtiType(e.currentTarget.value);
     const handleOnInterestsChange = (e: React.FormEvent<HTMLSelectElement>) => setMbtiType(e.currentTarget.value);
     const handleOnDescriptionChange = (e: React.FormEvent<HTMLInputElement>) => setDescription(e.currentTarget.value);
@@ -221,31 +232,59 @@ const Register = () => {
                         </select>
                     </label>
 
-                    <label id="checkbox">
+                    <label>
                         Wybierz zainteresowania:
-                        <FormGroup>
-                            <FormControlLabel
-                                control={<Checkbox onClick={handleOnIntrestChange} />}
-                                value="zwierzeta"
-                                label="zwierzeta"
-                            />
-                            <FormControlLabel
-                                control={<Checkbox onClick={handleOnIntrestChange} />}
-                                label="sport"
-                                value="sport"
-                            />
-                            <FormControlLabel
-                                control={<Checkbox onClick={handleOnIntrestChange} />}
-                                label="ksiazki"
-                                value="ksiazki"
-                            />
-                            <FormControlLabel
-                                control={<Checkbox onClick={handleOnIntrestChange} />}
-                                label="filmy"
-                                value="filmy"
-                            />
-                        </FormGroup>
                     </label>
+                        <FormGroup row sx={{
+                            marginLeft: "-650px",
+                            display: "flex",
+                            alignContent: "stretch",
+                            flexWrap: "nowrap",
+                            alignItems: "center",
+                            flexDirection: "row",
+                            justifyContent: "flex-end",
+                        }}>
+                                    <FormControlLabel
+                                        control={<Checkbox onClick={handleOnIntrestChange}/>}
+                                        value="zwierzeta"
+                                        label="zwierzeta"
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox onClick={handleOnIntrestChange}/>}
+                                        label="sport"
+                                        value="sport"
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox onClick={handleOnIntrestChange}/>}
+                                        label="ksiazki"
+                                        value="ksiazki"
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox onClick={handleOnIntrestChange}/>}
+                                        label="filmy"
+                                        value="filmy"
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox onClick={handleOnIntrestChange}/>}
+                                        value="zwierzeta"
+                                        label="zwierzeta"
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox onClick={handleOnIntrestChange}/>}
+                                        label="sport"
+                                        value="sport"
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox onClick={handleOnIntrestChange}/>}
+                                        label="ksiazki"
+                                        value="ksiazki"
+                                    />
+                                    <FormControlLabel
+                                        control={<Checkbox onClick={handleOnIntrestChange}/>}
+                                        label="filmy"
+                                        value="filmy"
+                                    />
+                                </FormGroup>
 
                     <label htmlFor="registerPassID">
                         Hasło:
