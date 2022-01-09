@@ -266,23 +266,23 @@ const Register = () => {
                                     />
                                     <FormControlLabel
                                         control={<Checkbox onClick={handleOnIntrestChange}/>}
-                                        value="zwierzeta"
-                                        label="zwierzeta"
+                                        value="religia"
+                                        label="religia"
                                     />
                                     <FormControlLabel
                                         control={<Checkbox onClick={handleOnIntrestChange}/>}
-                                        label="sport"
-                                        value="sport"
+                                        label="natura"
+                                        value="natura"
                                     />
                                     <FormControlLabel
                                         control={<Checkbox onClick={handleOnIntrestChange}/>}
-                                        label="ksiazki"
-                                        value="ksiazki"
+                                        label="imprezy"
+                                        value="imprezy"
                                     />
                                     <FormControlLabel
                                         control={<Checkbox onClick={handleOnIntrestChange}/>}
-                                        label="filmy"
-                                        value="filmy"
+                                        label="moda"
+                                        value="moda"
                                     />
                                 </FormGroup>
 
